@@ -8,8 +8,13 @@ local characters = {
     
     [0] = "Director", -- n/a
     [2495172515] = "Secretary", -- Raven
-    [0] = "Follower" -- n/a
+    [3233897743] = "Follower" -- Parsee
 }
+local banned = {
+    1060616090, -- Mini
+    882427078, -- Franko
+	4164721347 -- My alt (For testing)
+} 
 
 local spawnpos = CFrame.new(0, 10, 0)
 
@@ -33,7 +38,14 @@ plrs.PlayerAdded:Connect(function(plr)
     end
     plr:LoadCharacter()
     
-    if plr.Name == "87mq" or plr.Name == "Rylando11" or plr.Name == "relojalt" then
-        plr:Kick("HELLO :)")
+    for i = 1, id in pairs(banned) do
+        if plr.UserId == id then
+                warn("BAD PERSON")
+                plr:Kick([[ Hi!
+                    Looks like you've been banned from this game.
+					Why? It's probably some history between you and our group.
+                    In that case, please don't try to join again. You aren't getting unbanned. Ever.
+                    You're a terrible person, you know that, right? ]])
+        end
     end
 end)
