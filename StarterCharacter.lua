@@ -6,7 +6,7 @@ local characters = {
     [3057358093] = "Matthew", -- Mug
     [2703241450] = "Lilith", -- Galaxy
     
-    [0] = "Director", -- n/a
+    [1] = "Director", -- n/a
     [2495172515] = "Secretary", -- Raven
     [3233897743] = "Follower" -- Parsee
 }
@@ -27,7 +27,7 @@ plrs.PlayerAdded:Connect(function(plr)
         if charTemplate then
             local char = charTemplate:Clone()
                 char.Name = plr.Name
-                char:SetPrimaryPartCFrame(SpawnPosition)
+                char:SetPrimaryPartCFrame(CFrame.new(0, 10, 0))
                 char.Parent = workspace
             plr.Character = char
         else
