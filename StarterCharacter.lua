@@ -13,10 +13,8 @@ local characters = {
 local banned = {
     1060616090, -- Mini
     882427078, -- Franko
-	4164721347 -- My alt (For testing)
+    4164721347 -- My alt (For testing)
 } 
-
-local spawnpos = game.Workspace.Spawn.CFrame
 
 plrs.CharacterAutoLoads = false
 
@@ -29,7 +27,7 @@ plrs.PlayerAdded:Connect(function(plr)
         if charTemplate then
             local char = charTemplate:Clone()
                 char.Name = plr.Name
-                char:SetPrimaryPartCFrame(spawnpos)
+                char:SetPrimaryPartCFrame(SpawnPosition)
                 char.Parent = workspace
             plr.Character = char
         else
@@ -38,13 +36,15 @@ plrs.PlayerAdded:Connect(function(plr)
     end
     plr:LoadCharacter()
     
-    for i = 1, id in pairs(banned) do
+    for _ = 1, id in pairs(banned) do
         if plr.UserId == id then
                 warn("BAD PERSON")
                 plr:Kick([[ Hi!
-                    Looks like you've been banned from this game.
-					Why? It's probably some history between you and our group.
+
+		    Looks like you've been banned from this game.
+		    Why? It's probably some history between you and our group.
                     In that case, please don't try to join again. You aren't getting unbanned. Ever.
+					
                     You're a terrible person, you know that, right? ]])
         end
     end
