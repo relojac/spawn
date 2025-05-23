@@ -16,7 +16,7 @@ local banned = {
 	4164721347 -- My alt (For testing)
 } 
 
-local spawnpos = CFrame.new(0, 10, 0)
+local spawnpos = game.Workspace.Spawn
 
 plrs.CharacterAutoLoads = false
 
