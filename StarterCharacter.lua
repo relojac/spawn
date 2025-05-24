@@ -48,6 +48,6 @@ plrs.PlayerAdded:Connect(function(plr)
                     You're a terrible person, you know that, right? ]])
         end
 
-	plr:LoadCharacter()
+	
     end
 end)
