@@ -23,8 +23,8 @@ plrs.PlayerAdded:Connect(function(plr)
     print(plr.Name)
 
     local model = characters[plr.UserId]
-    if rs:FindFirstChild(model) then
-        local charTemplate = rs:FindFirstChild(model)
+    if rs:WaitforChild(model) then
+        local charTemplate = rs:WaitForChild(model)
         if charTemplate then
             local char = charTemplate:Clone()
                 char.Name = plr.Name
