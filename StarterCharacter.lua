@@ -34,9 +34,8 @@ plrs.PlayerAdded:Connect(function(plr)
             warn("??? " .. plr.Name)
         end
     end
-    plr:LoadCharacter()
     
-    for _ = 1, id in pairs(banned) do
+    for _, id in pairs(banned) do
         if plr.UserId == id then
                 warn("BAD PERSON")
                 plr:Kick([[ Hi!
@@ -47,5 +46,7 @@ plrs.PlayerAdded:Connect(function(plr)
 					
                     You're a terrible person, you know that, right? ]])
         end
+
+	plr:LoadCharacter()
     end
 end)
