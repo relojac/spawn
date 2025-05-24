@@ -17,6 +17,7 @@ local banned = {
 } 
 
 plrs.CharacterAutoLoads = false
+local p = workspace.SpawnPos
 
 plrs.PlayerAdded:Connect(function(plr)
     print(plr.Name)
@@ -27,7 +28,7 @@ plrs.PlayerAdded:Connect(function(plr)
         if charTemplate then
             local char = charTemplate:Clone()
                 char.Name = plr.Name
-                char:SetPrimaryPartCFrame(CFrame.new(0, 10, 0))
+                char:SetPrimaryPartCFrame(p.CFrame)
                 char.Parent = workspace
             plr.Character = char
         else
