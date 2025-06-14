@@ -14,7 +14,7 @@ uis.LastInputTypeChanged:Connect(inputUpd)
 
 rs.RenderStepped:Connect(function()
 	if frame.Visible then
-		local screenSize = frame:FindFirstChildOfClass("Screen").AbsoluteSize
+		local screenSize = frame:FindFirstChildOfClass("ScreenGui").AbsoluteSize
 		local minAxis = math.min(screenSize.X, screenSize.Y)
 		local isSmallScreen = minAxis <= 500
 		local jumpButtonSize = isSmallScreen and 70 or 120
