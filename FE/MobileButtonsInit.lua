@@ -25,14 +25,20 @@ function inputUpdate()
 	local lastInput = UserInputService:GetLastInputType( )
 
 	if lastInput == Enum.UserInputType.Focus then return end
-	frame.Visible = lastInput == Enum.UserInputType.Touch
+	JumpButtonFrame.Visible = lastInput == Enum.UserInputType.Touch
 end
 
 inputUpdate()
 UserInputService.LastInputTypeChanged:Connect(inputUpdate)
 
 RunService.RenderStepped:Connect(function()
-	if frame.Visible then
-		local screenSize = 
+	if JumpButtonFrame.Visible then
+		local screenSize = GhostGui.AbsoluteSize
+		local minAxis = math.min(screenSize.X, screenSize.Y)
+		local isSmallScreen = minAxis <= 500
+		local jumpButtonSize = isSmallScreen and 70 or 120
+		
+		JumpButtonFrame.Size = UDim2.new(0, jumpButtonSize, 0, jumpButtonSize)
+		JumpButtonFrame.Position = isSmallScreen and UDim2.new(1, -(jumpButtonSize*1.5-10), 1, -jumpButtonSize - 20) or UDim2.new(1, -(jumpButtonSize*1.5-10), 1, -jumpButtonSize * 1.75)
 	end
 end)
