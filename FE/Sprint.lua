@@ -1,4 +1,4 @@
-local execStart = tick()
+local execStart = tick() -- *starts timer* okay time to write code
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -21,7 +21,7 @@ local PlayerGui = Player.PlayerGui
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
 local BaseWalkSpeed = 16
-local ResWalkSpeed = 16
+local ResWalkSpeed = 16 -- WalkSpeed on respawn. Should be the same as BaseWalkSpeed.
 local Camera = workspace:WaitForChild("CurrentCamera")
 local BaseFOV = Camera.FieldOfView
 local FovMultiplier = 1.3
@@ -34,14 +34,12 @@ Player.CharacterAdded:Connect(function(char)
 	BaseWalkSpeed = ResWalkSpeed
 end)
 
-repeat task.wait() until PlayerGui.MobileButtons
-
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
-local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame")
+local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
 local SprintButton = Instance.new("ImageButton")
 	SprintButton.Name = "SprintButton"
-	SprintButton.Position = UDim2.new(-1.1, 0, -1.1, 0)
+	SprintButton.Position = UDim2.new(-1.1, 0, -1.1, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	SprintButton.Size = UDim2.new(1, 0, 1, 0)
 	SprintButton.BackgroundTransparency = 1
 	SprintButton.Active = true
@@ -59,21 +57,18 @@ local function endS()
 end
 
 SprintButton.MouseButton1Down:Connect(startS)
-SprintButton.MouseButton1Up:Connect(endS)
+SprintButton.MouseButton1Up:Connect(endS) -- Unfortunately, there's no easy way to get around the user releasingthe input outside the bounds of this button.
 
 UserInputService.InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
+	if input.KeyCode == Enum.KeyCode.LeftShift or input.KeyCode == Enum.KeyCode.ButtonX then
 		startS()
 	end
 end)
 UserInputService.InputEnded:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
+	if input.KeyCode == Enum.KeyCode.LeftShift or input.KeyCode == Enum.KeyCode.ButtonX then
 		endS()
 	end
 end)
-
-local execEnd = tick()
-print("Loaded " .. SprintButton .. " in " .. execEnd-execStart .. ".")
 
 local gamepad = {
 	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD.", 
@@ -89,14 +84,19 @@ if inputType == Enum.UserInputType.Touch then
 elseif inputType == Enum.UserInputType.Focus then
 	contents = keyboard
 elseif inputType == Enum.UserInputType.Gamepad1 then
-	contents = gamepad[UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)] -- According to the documentation, if the user is on PlayStation, this will return ButtonCross.
+	local mapped = UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)
+	contents = gamepad[mapped] -- According to the Roblox documentation, if the user is on PlayStation, this will return ButtonCross. The table is as seen in the example code provided.
 else
-	warn("what device are you on vro 💔")
+	warn("what device are you on vro 💔") -- Yeah if you somehow get this console message you're probably playing on like a Gyroscope or something
+	contents = mobile -- It's up to the user to find out what the run button is. Roblox most likely doesn't recognize their input device, either.
 end
 	
 
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "HELLO   MY VESSEL.",
-	Text = contents,
-	Duration = 10
+game:GetService("StarterGui"):SetCore("SendNotification", {
+	Title = "HELLO   MY PLAYER.", -- Tried something Gaster-y because yeah
+	Text = contents, -- If I wrote this stupid script write this should change based on your device
+	Duration = 15 -- How long the notification actually stays on screen. Wish we could make the Roblox app notify people or create new windows lmao that would be sick
 })
+
+local execEnd = tick() -- *stops timer* okay done :3
+print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to took to load this
