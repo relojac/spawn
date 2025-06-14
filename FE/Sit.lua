@@ -23,7 +23,7 @@ local SitButton = Instance.new("ImageButton")
 	SitButton.Size = UDim2.new(1, 0, 1, 0)
 	SitButton.BackgroundTransparency = 1
 	SitButton.Active = true
-	SitButton.Image = "rbxassetid://120316668670756"
+	SitButton.Image = "rbxassetid://79989066743509"
 	SitButton.Parent = JumpButtonFrame
 
 local function sit()
@@ -32,9 +32,9 @@ end
 
 RunService.Heartbeat:Connect(function()
 	if Humanoid.Sit then
-		SitButton.Image = "rbxassetid://125086742998263"
+		SitButton.Image = "rbxassetid://92918494397842"
 	else
-		SitButton.Image = "rbxassetid://120316668670756"
+		SitButton.Image = "rbxassetid://79989066743509"
 	end
 end)
 
