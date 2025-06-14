@@ -27,9 +27,9 @@ local StunButton = Instance.new("ImageButton")
 	StunButton.Parent = JumpButtonFrame
 
 local Stun = Instance.new("TextLabel")
-	Stun.Name = "Text" 
+	Stun.Name = "StunText" 
 	Stun.Size = UDim2.new(1, 0, 1, 0)
-	tun.Text = "Stun"
+	Stun.Text = "Stun"
 	Stun.BackgroundTransparency = 1
 	Stun.TextSize = 15
 	Stun.TextColor3 = Color3.new(1, 1, 1)
