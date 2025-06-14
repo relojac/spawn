@@ -14,24 +14,24 @@ local Expo_Out = TweenInfo.new(
 	Enum.EasingDirection.Out
 )
 
+repeat task.wait() until Players.LocalPlayer.Character
+
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local Character = Player.Character or nil
-local Humanoid = Character:FindFirstChildOfClass("Humanoid") or nil
+local Character = Player.Character
+local Humanoid = Character:WaitForChild("Humanoid")
 local BaseWalkSpeed = 16
 local ResWalkSpeed = 16
-local Camera = workspace.CurrentCamera or workspace:WaitForChild("CurrentCamera")
+local Camera = workspace:WaitForChild("CurrentCamera")
 local BaseFOV = Camera.FieldOfView
 local FovMultiplier = 1.3
 
 Player.CharacterAdded:Connect(function(char)
-	if (not Character) and (char) then
-		Character = char
-		Humanoid = Character:WaitForChild("Humanoid")
-		ResWalkSpeed = Humanoid.WalkSpeed
+	Character = char
+	Humanoid = Character:FindFirstChildOfClass("Humanoid")
+	ResWalkSpeed = Humanoid.WalkSpeed
 
-		if BaseWalkSpeed ~= ResWalkSpeed then BaseWalkSpeed = ResWalkSpeed end
-	end
+	BaseWalkSpeed = ResWalkSpeed
 end)
 
 repeat task.wait() until PlayerGui.MobileButtons
