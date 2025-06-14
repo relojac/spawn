@@ -6,13 +6,13 @@ local TweenService = game:GetService("TweenService")
 
 local Sine_InOut = TweenInfo.new(
 	0.75,
-	Enum.EasingType.Sine,
+	Enum.EasingStyle.Sine,
 	Enum.EasingDirection.InOut
 )
 
 local Expo_Out = TweenInfo.new(
 	1,
-	Enum.EasingType.Exponential,
+	Enum.EasingStyle.Exponential,
 	Enum.EasingDirection.Out
 )
 
@@ -24,6 +24,7 @@ local BaseWalkSpeed = 16
 local ResWalkSpeed = 16 -- WalkSpeed on respawn. Should be the same as BaseWalkSpeed.
 local Camera = workspace:WaitForChild("CurrentCamera")
 local BaseFOV = Camera.FieldOfView
+local WalkSpeedMultiplier
 local FovMultiplier = 1.3
 
 Player.CharacterAdded:Connect(function(char)
@@ -49,7 +50,7 @@ local SprintButton = Instance.new("ImageButton")
 		-- i turn off brain and start coding
 
 local function startS()
-	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed + (BaseWalkSpeed/2) }):Play()
+	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier }):Play()
 	TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier }):Play()
 end
 local function endS()
