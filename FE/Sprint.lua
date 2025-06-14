@@ -20,7 +20,9 @@ local Character = Player.Character or nil
 local Humanoid = Character:FindFirstChildOfClass("Humanoid") or nil
 local BaseWalkSpeed = 16
 local ResWalkSpeed = 16
-local Camera = workspace.CurrentCamera
+local Camera = workspace.CurrentCamera or workspace:WaitForChild("CurrentCamera")
+local BaseFOV = Camera.FieldOfView
+local FovMultiplier = 1.3
 
 Player.CharacterAdded:Connect(function(char)
 	if (not Character) and (char) then
@@ -28,7 +30,7 @@ Player.CharacterAdded:Connect(function(char)
 		Humanoid = Character:WaitForChild("Humanoid")
 		ResWalkSpeed = Humanoid.WalkSpeed
 
-		if BaseWalkSpeed ~= ResWalkSpeed then BaseWalkSpeed = Humanoid.WalkSpeed end
+		if BaseWalkSpeed ~= ResWalkSpeed then BaseWalkSpeed = ResWalkSpeed end
 	end
 end)
 
@@ -42,17 +44,17 @@ local SprintButton = Instance.new("ImageButton", JumpButtonFrame)
 	SprintButton.Position = UDim2.new(-1.1, 0, -1.1, 0)
 	SprintButton.Size = UDim2.new(1, 0, 1, 0)
 	SprintButton.BackgroundTransparency = 1
-	SprintButton.Active = false
+	SprintButton.Active = true
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
 
 local function startS()
-	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed += (Humanoid.WalkSpeed/2) }):Play()
-	TweenService:Create(Camera, Sine_InOut, { FieldOfView = math.round(Camera.FieldOfView*1.28571428571) }):Play()
+	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed + (BaseWalkSpeed/2) }):Play()
+	TweenService:Create(Camera, Sine_InOut, { FieldOfView = math.round(BaseFOV*FovMultiplier) }):Play()
 end
 local function endS()
-	TweenService:Create(Humanoid, Expo_Out, { WalkSpeed += (WalkSpeed/2) }):Play()
-	TweenService:Create(Camera, Expo_Out, { FieldOfView = math.round(Camera.FieldOfView/1.28571428571) }):Play()
+	TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed }):Play()
+	TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV }):Play()
 end
 
 SprintButton.MouseButton1Down:Connect(startS)
