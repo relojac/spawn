@@ -1,10 +1,3 @@
--- hello contributors to this Script write your names here NOW
--- relojac :3
--- GalaxyChan :0
--- jikkenthe10th 🐔🐔
--- The original     Starwalker
--- ^ who tf let Aussie have Editor permissions 😭😭😭
-
 local execStart = tick() -- *starts timer* okay time to write code
 
 local Players = game:GetService("Players")
@@ -52,7 +45,7 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Active = true
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
-	SprintButton.Parent = JumpButtonFrame -- @relojac When do you have the time to write this
+	SprintButton.Parent = JumpButtonFrame
 		-- i turn off brain and start coding
 
 local function startS()
