@@ -44,14 +44,14 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
-task.wait(0.5)
+task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sit.lua"))()
 
-task.wait(0.5)
+task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sprint.lua"))()
 
-task.wait(0.5)
+task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Stun.lua"))()
 
-task.wait(0.5)
+task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Suicide.lua"))()
