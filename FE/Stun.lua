@@ -19,7 +19,7 @@ local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This ha
 
 local StunButton = Instance.new("ImageButton")
 	StunButton.Name = "StunButton"
-	StunButton.Position = UDim2.new(-1.1, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
+	StunButton.Position = UDim2.new(-2.2, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	StunButton.Size = UDim2.new(1, 0, 1, 0)
 	StunButton.BackgroundTransparency = 1
 	StunButton.Active = true
@@ -53,7 +53,7 @@ end)
 StunButton.MouseButton1Click:Connect(stun)
 
 UserInputService.InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.KeypadOne or input.KeyCode == Enum.KeyCode.ButtonY then
+	if input.KeyCode == Enum.KeyCode.KeypadTwo or input.KeyCode == Enum.KeyCode.ButtonL3 then
 		stun()
 	end
 end)
