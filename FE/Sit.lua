@@ -34,15 +34,15 @@ while Humanoid and Humanoid.Health > 0 do
 	task.wait()
 
 	if Sitting then
-		Humanoid.Sit = true
+		if not Humanoid.Sit then Humanoid.Sit = true end
 		SitButton.Image = "rbxassetid://92918494397842"
 	else
-		Humanoid.Sit = false
+		if Humanoid.Sit then Humanoid.Sit = false end
 		SitButton.Image = "rbxassetid://79989066743509"
 	end
 end
 
-SprintButton.MouseButton1Click:Connect(sit)
+SitButton.MouseButton1Click:Connect(sit)
 
 UserInputService.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.KeypadOne or input.KeyCode == Enum.KeyCode.ButtonY then
