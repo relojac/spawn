@@ -18,7 +18,7 @@ local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
 local SuicideButton = Instance.new("ImageButton")
-	SuicideButton.Name "SuicideButton"
+	SuicideButton.Name = "SuicideButton"
 	SuicideButton.Position = UDim2.new(-2.2, 0, -1.1, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	SuicideButton.Size = UDim2.new(1, 0, 1, 0)
 	SuicideButton.BackgroundTransparency = 1
