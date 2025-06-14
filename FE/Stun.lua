@@ -2,12 +2,12 @@ local execStart = tick() -- *starts timer* okay time to write code
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
-local Stunned = false
 
 Player.CharacterAdded:Connect(function(char)
 	Character = char
@@ -27,32 +27,28 @@ local StunButton = Instance.new("ImageButton")
 	StunButton.Parent = JumpButtonFrame
 
 local Stun = Instance.new("TextLabel")
-  Stun.Name = "Text" 
-  Stun.Size = UDim2.new(1, 0, 1, 0)
-  Stun.Text = "Stun"
-  Stun.BackgroundTransparency = 1
-  Stun.TextSize = 15
-  Stun.TextColor3 = Color3.new(1, 1, 1)
-  Stun.TextStrokeColor3 = Color3.new(0, 0, 0)
-  Stun.TextStrokeTransparency = 0
-  Stun.ZIndex = 1
-  Stun.Parent = StunButton
+	Stun.Name = "Text" 
+	Stun.Size = UDim2.new(1, 0, 1, 0)
+	tun.Text = "Stun"
+	Stun.BackgroundTransparency = 1
+	Stun.TextSize = 15
+	Stun.TextColor3 = Color3.new(1, 1, 1)
+	Stun.TextStrokeColor3 = Color3.new(0, 0, 0)
+	Stun.TextStrokeTransparency = 0
+	Stun.ZIndex = 1
+	Stun.Parent = StunButton
 
 local function stun()
-	if not Stunned then Stunned = true else Stunned = false end
+	if not Humanoid.PlatformStand then Humanoid.PlatformStand = true else Humanoid.PlatformStand = false end
 end
 
-while Humanoid and Humanoid.Health > 0 do
-	task.wait()
-
-	if Stunned then
-		Humanoid.Stun = true
+RunService.Heartbeat:Connect(function()
+	if Humanoid.PlatformStand then
 		StunButton.Image = "rbxassetid://125086742998263"
 	else
-		Humanoid.PlatformStand = false
-		StunButton.Image = "rbxassetid://120316668670756
+		StunButton.Image = "rbxassetid://120316668670756"
 	end
-end
+end)
 
 StunButton.MouseButton1Click:Connect(stun)
 
