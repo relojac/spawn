@@ -1,3 +1,10 @@
+-- hello contributors to this Script write your names here NOW
+-- relojac :3
+-- GalaxyChan :0
+-- jikkenthe10th 🐔🐔
+-- The original     Starwalker
+-- ^ who tf let Aussie have Editor permissions 😭😭😭
+
 local execStart = tick() -- *starts timer* okay time to write code
 
 local Players = game:GetService("Players")
@@ -45,11 +52,12 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Active = true
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
-	SprintButton.Parent = JumpButtonFrame
+	SprintButton.Parent = JumpButtonFrame -- @relojac When do you have the time to write this
+		-- i turn off brain and start coding
 
 local function startS()
 	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed + (BaseWalkSpeed/2) }):Play()
-	TweenService:Create(Camera, Sine_InOut, { FieldOfView = math.round(BaseFOV*FovMultiplier) }):Play()
+	TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier }):Play()
 end
 local function endS()
 	TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed }):Play()
@@ -94,7 +102,7 @@ end
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "HELLO   MY PLAYER.", -- Tried something Gaster-y because yeah
-	Text = contents, -- If I wrote this stupid script write this should change based on your device
+	Text = contents, -- If I wrote this stupid script right this should change based on your device. Idfk lmao I'm not gonna check
 	Duration = 15 -- How long the notification actually stays on screen. Wish we could make the Roblox app notify people or create new windows lmao that would be sick
 })
 
