@@ -22,7 +22,7 @@ local Character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
 local BaseWalkSpeed = 16
 local ResWalkSpeed = 16 -- WalkSpeed on respawn. Should be the same as BaseWalkSpeed.
-local Camera = workspace:WaitForChild("CurrentCamera")
+local Camera = workspace.CurrentCamera or workspace:WaitForChild("Camera")
 local BaseFOV = Camera.FieldOfView
 local WalkSpeedMultiplier
 local FovMultiplier = 1.3
