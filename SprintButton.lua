@@ -33,13 +33,13 @@ button.MouseButton1Up:Connect(function()
 end)
 
 uis.InputBegan:Connect(function(key)
-	if key.KeyCode == Enum.KeyCode.LeftShift then
+	if key.KeyCode == Enum.KeyCode.LeftShift or Enum.KeyCode.ButtonL2 then
 		startSprint()
 	end
 end)
 
 uis.InputEnded:Connect(function(key)
-	if key.KeyCode == Enum.KeyCode.LeftShift then
+	if key.KeyCode == Enum.KeyCode.LeftShift or Enum.Keycode.ButtonL2 then
 		endSprint()
 	end
 end)
