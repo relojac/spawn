@@ -39,7 +39,7 @@ repeat task.wait() until PlayerGui.MobileButtons
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame")
 
-local SprintButton = Instance.new("ImageButton", JumpButtonFrame)
+local SprintButton = Instance.new("ImageButton")
 	SprintButton.Name = "SprintButton"
 	SprintButton.Position = UDim2.new(-1.1, 0, -1.1, 0)
 	SprintButton.Size = UDim2.new(1, 0, 1, 0)
@@ -47,6 +47,7 @@ local SprintButton = Instance.new("ImageButton", JumpButtonFrame)
 	SprintButton.Active = true
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
+	SprintButton.Parent = JumpButtonFrame
 
 local function startS()
 	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed + (BaseWalkSpeed/2) }):Play()
@@ -60,13 +61,13 @@ end
 SprintButton.MouseButton1Down:Connect(startS)
 SprintButton.MouseButton1Up:Connect(endS)
 
-UserInputService.InputBegan:Connect(function(KeyCode)
-	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
 		startS()
 	end
 end)
-UserInputService.InputEnded:Connect(function(KeyCode)
-	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
+UserInputService.InputEnded:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
 		endS()
 	end
 end)
@@ -76,7 +77,7 @@ print("Loaded " .. SprintButton .. " in " .. execEnd-execStart .. ".")
 
 local gamepad = {
 	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD.", 
-	ButtonSquare = "ATTEMPT TO   HOLD [SQUARE]   ON YOUR  GAMEPAD.",
+	ButtonSquare = "ATTEMPT TO   HOLD [SQUARE]   ON YOUR  GAMEPAD."
 }
 local keyboard = "ATTEMPT TO   HOLD [LEFTSHIFT]   ON YOUR  KEYBOARD."
 local mobile = "ATTEMPT TO   HOLD THE RUN BUTTON   ON YOUR  TOUCHSCREEN."
@@ -88,9 +89,9 @@ if inputType == Enum.UserInputType.Touch then
 elseif inputType == Enum.UserInputType.Focus then
 	contents = keyboard
 elseif inputType == Enum.UserInputType.Gamepad1 then
-	contents = gamepad[UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)]
+	contents = gamepad[UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)] -- According to the documentation, if the user is on PlayStation, this will return ButtonCross.
 else
-	warn("what are you on vro 💔")
+	warn("what device are you on vro 💔")
 end
 	
 
