@@ -42,3 +42,15 @@ RunService.RenderStepped:Connect(function()
 		JumpButtonFrame.Position = isSmallScreen and UDim2.new(1, -(jumpButtonSize*1.5-10), 1, -jumpButtonSize - 20) or UDim2.new(1, -(jumpButtonSize*1.5-10), 1, -jumpButtonSize * 1.75)
 	end
 end)
+
+task.wait(0.5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sit.lua"))()
+
+task.wait(0.5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sprint.lua"))()
+
+task.wait(0.5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Stun.lua"))()
+
+task.wait(0.5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Suicide.lua"))()
