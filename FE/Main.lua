@@ -1,3 +1,5 @@
+local execStart = tick()
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -25,6 +27,7 @@ local GhostGui = Instance.new("ScreenGui", JumpButtonFrame) -- Used to get the A
 function inputUpdate()
 	local lastInput = UserInputService:GetLastInputType()
 
+	print(lastInput .. ",", lastInput == Enum.UserInputType.Touch)
 	if lastInput == Enum.UserInputType.Focus then return end
 	JumpButtonFrame.Visible = lastInput == Enum.UserInputType.Touch
 end
@@ -37,6 +40,7 @@ RunService.RenderStepped:Connect(function()
 		local screenSize = GhostGui.AbsoluteSize
 		local minAxis = math.min(screenSize.X, screenSize.Y)
 		local isSmallScreen = minAxis <= 500
+			print("isSmallScreen", isSmallScreen)
 		local jumpButtonSize = isSmallScreen and 70 or 120
 		
 		JumpButtonFrame.Size = UDim2.new(0, jumpButtonSize, 0, jumpButtonSize)
@@ -44,14 +48,11 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
+local execEnd = tick()
+print("Loaded main GUI in", tostring(execEnd-execStart) .. ".")
+
 task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sit.lua"))()
-
-task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sprint.lua"))()
-
-task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Stun.lua"))()
-
-task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Suicide.lua"))()
