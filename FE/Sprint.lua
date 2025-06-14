@@ -1,3 +1,5 @@
+local execStart = tick()
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -37,7 +39,7 @@ end)
 repeat task.wait() until PlayerGui.MobileButtons
 
 local MobileButtons = PlayerGui:FindFirstChild("MobileButtonsLocal", true)
-local JumpButtonFrame = MobileButtons:FindFirstChild("JumpButtonFrame")
+local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame")
 
 local SprintButton = Instance.new("ImageButton", JumpButtonFrame)
 	SprintButton.Name = "SprintButton"
@@ -61,12 +63,41 @@ SprintButton.MouseButton1Down:Connect(startS)
 SprintButton.MouseButton1Up:Connect(endS)
 
 UserInputService.InputBegan:Connect(function(KeyCode)
-	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonL2 then
+	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
 		startS()
 	end
 end)
 UserInputService.InputEnded:Connect(function(KeyCode)
-	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonL2 then
+	if KeyCode == Enum.KeyCode.LeftShift or KeyCode == Enum.KeyCode.ButtonX then
 		endS()
 	end
 end)
+
+local execEnd = tick()
+print("Loaded " .. SprintButton .. " in " .. execEnd-execStart .. ".")
+
+local gamepad = {
+	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD", 
+	ButtonSquare = "ATTEMPT TO   HOLD [SQUARE]   ON YOUR  GAMEPAD",
+}
+local keyboard = "ATTEMPT TO   HOLD [LEFTSHIFT]   ON YOUR  KEYBOARD"
+local mobile = "ATTEMPT TO   HOLD THE RUN BUTTON   ON YOUR  SCREEN"
+
+local inputType = UserInputService:GetLastInputType()
+local contents = keyboard
+if inputType == Enum.UserInputType.Touch then
+	contents = mobile
+elseif inputType == Enum.UserInputType.Focus then
+	contents = keyboard
+elseif inputType == Enum.UserInputType.Gamepad1 then
+	contents = gamepad[UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)]
+else
+	warn("what are you on vro 💔")
+end
+	
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "HELLO   USER.",
+	Text = contents,
+	Duration = 10
+})
