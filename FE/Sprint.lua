@@ -16,11 +16,9 @@ local Expo_Out = TweenInfo.new(
 	Enum.EasingDirection.Out
 )
 
-repeat task.wait() until Players.LocalPlayer.Character
-
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local Character = Player.Character
+local Character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
 local BaseWalkSpeed = 16
 local ResWalkSpeed = 16
@@ -30,7 +28,7 @@ local FovMultiplier = 1.3
 
 Player.CharacterAdded:Connect(function(char)
 	Character = char
-	Humanoid = Character:FindFirstChildOfClass("Humanoid")
+	Humanoid = Character:WaitForChild("Humanoid")
 	ResWalkSpeed = Humanoid.WalkSpeed
 
 	BaseWalkSpeed = ResWalkSpeed
@@ -38,7 +36,7 @@ end)
 
 repeat task.wait() until PlayerGui.MobileButtons
 
-local MobileButtons = PlayerGui:FindFirstChild("MobileButtonsLocal", true)
+local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame")
 
 local SprintButton = Instance.new("ImageButton", JumpButtonFrame)
@@ -77,11 +75,11 @@ local execEnd = tick()
 print("Loaded " .. SprintButton .. " in " .. execEnd-execStart .. ".")
 
 local gamepad = {
-	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD", 
-	ButtonSquare = "ATTEMPT TO   HOLD [SQUARE]   ON YOUR  GAMEPAD",
+	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD.", 
+	ButtonSquare = "ATTEMPT TO   HOLD [SQUARE]   ON YOUR  GAMEPAD.",
 }
-local keyboard = "ATTEMPT TO   HOLD [LEFTSHIFT]   ON YOUR  KEYBOARD"
-local mobile = "ATTEMPT TO   HOLD THE RUN BUTTON   ON YOUR  SCREEN"
+local keyboard = "ATTEMPT TO   HOLD [LEFTSHIFT]   ON YOUR  KEYBOARD."
+local mobile = "ATTEMPT TO   HOLD THE RUN BUTTON   ON YOUR  TOUCHSCREEN."
 
 local inputType = UserInputService:GetLastInputType()
 local contents = keyboard
@@ -97,7 +95,7 @@ end
 	
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "HELLO   USER.",
+	Title = "HELLO   MY VESSEL.",
 	Text = contents,
 	Duration = 10
 })
