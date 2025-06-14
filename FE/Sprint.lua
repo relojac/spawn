@@ -47,7 +47,6 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
 	SprintButton.Parent = JumpButtonFrame
-		-- i turn off brain and start coding
 
 local function startS()
 	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier }):Play()
