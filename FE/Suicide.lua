@@ -24,7 +24,7 @@ local SuicideButton = Instance.new("ImageButton")
 	SuicideButton.BackgroundTransparency = 1
 	SuicideButton.Active = true
 	SuicideButton.Image = "rbxassetid://126419275995568"
-  SuicideButton.PressedImage = "rbxassetid://105161719865735"
+	SuicideButton.PressedImage = "rbxassetid://105161719865735"
 	SuicideButton.Parent = JumpButtonFrame
 
 local function suicide()
