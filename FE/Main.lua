@@ -5,6 +5,7 @@ local UserInputService = game:GetService("UserInputService")
 local Player = Players.LocalPlayer -- Player
 local PlayerGui = Player.PlayerGui -- Gui Objects
 
+if PlayerGui:FindFirstChild("MobileButtonsLocal") then PlayerGui.MobileButtonsLocal:Destroy() end
 local MobileButtons = Instance.new("ScreenGui", PlayerGui) -- Gui object
 	MobileButtons.Name = "MobileButtonsLocal"
 	MobileButtons.ResetOnSpawn = false -- Gui will not be reverted on respawn
