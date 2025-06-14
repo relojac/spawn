@@ -96,7 +96,7 @@ end
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "HELLO   MY PLAYER.", -- Tried something Gaster-y because yeah
 	Text = contents, -- If I wrote this stupid script right this should change based on your device. Idfk lmao I'm not gonna check
-	Duration = 15 -- How long the notification actually stays on screen. Wish we could make the Roblox app notify people or create new windows lmao that would be sick
+	Duration = 10 -- How long the notification actually stays on screen. Wish we could make the Roblox app notify people or create new windows lmao that would be sick
 })
 
 local execEnd = tick() -- *stops timer* okay done :3
