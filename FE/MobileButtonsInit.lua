@@ -22,7 +22,7 @@ local GhostGui = Instance.new("ScreenGui", JumpButtonFrame) -- Used to get the A
 	GhostGui.SafeAreaCompatibility = Enum.SafeAreaCompatibility.FullscreenExtension
 
 function inputUpdate()
-	local lastInput = UserInputService:GetLastInputType( )
+	local lastInput = UserInputService:GetLastInputType()
 
 	if lastInput == Enum.UserInputType.Focus then return end
 	JumpButtonFrame.Visible = lastInput == Enum.UserInputType.Touch
