@@ -6,6 +6,7 @@ local Config = Global.SpawnUtilsConfig or {}
 local SprintConfig = Config.Sprint
 local Mults = SprintConfig.Multipliers
 local Easing = SprintConfig.Easing
+local Toggle = SprintConfig.ButtonToggleable
 
 local EaseIn = Easing.In
 local EaseOut = Easing.Out
@@ -89,18 +90,25 @@ Player.CharacterAdded:Connect(function(char)
 	SprintButton.Image = "rbxassetid://118709768438655"
 end)
 
-SprintButton.MouseButton1Click:Connect(function()
-	if not Sprinting then Sprinting = true else Sprinting = false end
+if Toggle then
+	SprintButton.MouseButton1Click:Connect(function()
+		if not Sprinting then Sprinting = true else Sprinting = false end
 
-	task.wait()
-	if Sprinting then
-		startS()
-		SprintButton.Image = "rbxassetid://111778431619800"
-	else
-		endS() 
-		SprintButton.Image = "rbxassetid://118709768438655"
-	end
-end)
+		task.wait()
+		if Sprinting then
+			startS()
+			SprintButton.Image = "rbxassetid://111778431619800"
+		else
+			endS() 
+			SprintButton.Image = "rbxassetid://118709768438655"
+		end
+	end)
+else
+	SprintButton.PressedImage = "rbxassetid://111778431619800"
+	Sprinting = nil
+	SprintButton.MouseButton1Down:Connect(function() startS end)
+	SprintButton.MouseButton1Up:Connect(function() endS end)
+end
 
 UserInputService.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.LeftShift or input.KeyCode == Enum.KeyCode.ButtonX then
