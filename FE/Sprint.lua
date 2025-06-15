@@ -10,13 +10,13 @@ local Easing = SprintConfig.Easing
 local EaseIn = Easing.In
 local EaseOut = Easing.Out
 
-local TimeIn = EaseIn.Time
-local StyleIn = EaseIn.Style
-local DirectionIn = EaseIn.Direction
+local TimeIn = EaseIn.Time or 0.75
+local StyleIn = EaseIn.Style or Enum.EasingStyle.Sine
+local DirectionIn = EaseIn.Direction or Enum.EasingDirection.InOut
 --
-local TimeOut = EaseOut.Time
-local StyleOut = EaseOut.Style
-local DirectionOut = EaseOut.Direction
+local TimeOut = EaseOut.Time or 1
+local StyleOut = EaseOut.Style or Enum.EasingStyle.Exponential
+local DirectionOut = EaseOut.Direction or Enum.EasingDirection.Out
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -42,8 +42,8 @@ local BaseWalkSpeed = 16
 local ResWalkSpeed = 16 -- WalkSpeed on respawn. Should be the same as BaseWalkSpeed.
 local Camera = workspace.CurrentCamera or workspace:WaitForChild("Camera")
 local BaseFOV = Camera.FieldOfView
-local WalkSpeedMultiplier = Mults.WalkSpeed
-local FovMultiplier = Mults.FieldOfView
+local WalkSpeedMultiplier = Mults.WalkSpeed or 1.5
+local FovMultiplier = Mults.FieldOfView or 1.3
 
 Player.CharacterAdded:Connect(function(char)
 	Character = char
