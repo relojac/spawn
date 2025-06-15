@@ -66,17 +66,32 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
 	SprintButton.Parent = JumpButtonFrame
 
+local Tween1 = TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier })
+local Tween2 = TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier })
+
+local Tween3 = TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed })
+local Tween4 = TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV })
+
 local function startS()
-	TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier }):Play()
-	TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier }):Play()
-end
-local function endS()
-	TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed }):Play()
-	TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV }):Play()
+	Tween1:Play()
+	Tween2:Play()
+
+	Tween3:Cancel()
+	Tween4:Cancel()
 end
 
-SprintButton.MouseButton1Down:Connect(startS)
-SprintButton.MouseButton1Up:Connect(endS) -- Unfortunately, there's no easy way to get around the user releasingthe input outside the bounds of this button.
+local function endS()
+	Tween3:Play()
+	Tween4:Play()
+
+	Tween1:Cancel()
+	Tween2:Cancel()
+end
+
+local Sprinting = false
+SprintButton.MouseButton1Click:Connect(function()
+	
+end)
 
 UserInputService.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.LeftShift or input.KeyCode == Enum.KeyCode.ButtonX then
