@@ -54,16 +54,10 @@ local Tween3 = TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpe
 local Tween4 = TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV })
 
 local function startS()
-	Tween3:Cancel()
-	Tween4:Cancel()
-	task.wait()
 	Tween1:Play()
 	Tween2:Play()
 end
 local function endS()
-	Tween1:Cancel()
-	Tween2:Cancel()
-	task.wait()
 	Tween3:Play()
 	Tween4:Play()
 end
