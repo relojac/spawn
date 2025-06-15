@@ -21,6 +21,7 @@ local DirectionOut = EaseOut.Direction or Enum.EasingDirection.Out
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 
 local Sine_InOut = TweenInfo.new(
 	TimeIn,
@@ -34,6 +35,7 @@ local Expo_Out = TweenInfo.new(
 	DirectionOut
 )
 
+local Sprinting = false
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local Character = Player.Character or Player.CharacterAdded:Wait()
@@ -51,6 +53,7 @@ Player.CharacterAdded:Connect(function(char)
 	ResWalkSpeed = Humanoid.WalkSpeed
 
 	BaseWalkSpeed = ResWalkSpeed
+	Sprinting = false
 end)
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
@@ -63,7 +66,6 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.BackgroundTransparency = 1
 	SprintButton.Active = true
 	SprintButton.Image = "rbxassetid://118709768438655"
-	SprintButton.PressedImage = "rbxassetid://111778431619800"
 	SprintButton.Parent = JumpButtonFrame
 
 local Tween1 = TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier })
@@ -88,9 +90,17 @@ local function endS()
 	Tween2:Cancel()
 end
 
-local Sprinting = false
 SprintButton.MouseButton1Click:Connect(function()
-	
+	if not Sprinting then Sprinting = true else Sprinting = false end
+
+	task.wait()
+	if Sprinting then
+		startS()
+		SprintButton.Image = "rbxassetid://111778431619800"
+	else
+		endS() 
+		SprintButton.Image = "rbxassetid://118709768438655"
+	end
 end)
 
 UserInputService.InputBegan:Connect(function(input)
