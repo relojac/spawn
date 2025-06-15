@@ -75,13 +75,20 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Parent = JumpButtonFrame
 
 Player.CharacterAdded:Connect(function(char)
-	Character = Player.Character or Player.CharacterAdded:Wait() or char
+	Camera = workspace.CurrentCamera
+	
+	Character = char or Player.Character
 	Humanoid = Character:WaitForChild("Humanoid")
 	ResWalkSpeed = Humanoid.WalkSpeed
 	BaseWalkSpeed = ResWalkSpeed
 
 	if Sprinting ~= nil then Sprinting = false end
 	SprintButton.Image = "rbxassetid://118709768438655"
+
+	Tween1 = TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier })
+	Tween2 = TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier })
+	Tween3 = TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed })
+	Tween4 = TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV })
 end)
 
 if Toggle then
