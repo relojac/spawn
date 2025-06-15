@@ -39,7 +39,6 @@ RunService.RenderStepped:Connect(function()
 		local screenSize = GhostGui.AbsoluteSize
 		local minAxis = math.min(screenSize.X, screenSize.Y)
 		local isSmallScreen = minAxis <= 500
-			print("isSmallScreen", isSmallScreen)
 		local jumpButtonSize = isSmallScreen and 70 or 120
 		
 		JumpButtonFrame.Size = UDim2.new(0, jumpButtonSize, 0, jumpButtonSize)
@@ -47,10 +46,12 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
+print("isSmallScreen", isSmallScreen)
+
 local execEnd = tick()
 print("Loaded main GUI in", tostring(execEnd-execStart) .. ".")
 
-task.wait(0.1)
+task.wait()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sit.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Sprint.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Stun.lua"))()
