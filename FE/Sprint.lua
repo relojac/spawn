@@ -1,19 +1,37 @@
 local execStart = tick() -- *starts timer* okay time to write code
 
+local Global = (getgenv and getgenv()) or shared
+local Config = Global.SpawnUtilsConfig or {}
+
+local SprintConfig = Config.Sprint
+local Mults = SprintConfig.Multipliers
+local Easing = SprintConfig.Easing
+
+local EaseIn = Easing.In
+local EaseOut = Easing.Out
+
+local TimeIn = EaseIn.Time
+local StyleIn = EaseIn.Style
+local DirectionIn = EaseIn.Direction
+--
+local TimeOut = EaseOut.Time
+local StyleOut = EaseOut.Style
+local DirectionOut = EaseOut.Direction
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 
 local Sine_InOut = TweenInfo.new(
-	0.75,
-	Enum.EasingStyle.Sine,
-	Enum.EasingDirection.InOut
+	TimeIn,
+	StyleIn,
+	DirectionIn
 )
 
 local Expo_Out = TweenInfo.new(
-	1,
-	Enum.EasingStyle.Exponential,
-	Enum.EasingDirection.Out
+	TimeOut,
+	StyleOut,
+	DirectionOut
 )
 
 local Player = Players.LocalPlayer
@@ -24,8 +42,8 @@ local BaseWalkSpeed = 16
 local ResWalkSpeed = 16 -- WalkSpeed on respawn. Should be the same as BaseWalkSpeed.
 local Camera = workspace.CurrentCamera or workspace:WaitForChild("Camera")
 local BaseFOV = Camera.FieldOfView
-local WalkSpeedMultiplier
-local FovMultiplier = 1.3
+local WalkSpeedMultiplier = Mults.WalkSpeed
+local FovMultiplier = Mults.FieldOfView
 
 Player.CharacterAdded:Connect(function(char)
 	Character = char
