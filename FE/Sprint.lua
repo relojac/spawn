@@ -47,14 +47,23 @@ local BaseFOV = Camera.FieldOfView
 local WalkSpeedMultiplier = Mults.WalkSpeed or 1.5
 local FovMultiplier = Mults.FieldOfView or 1.3
 
-Player.CharacterAdded:Connect(function(char)
-	Character = char
-	Humanoid = Character:WaitForChild("Humanoid")
-	ResWalkSpeed = Humanoid.WalkSpeed
+local Tween1 = TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier })
+local Tween2 = TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier })
+local Tween3 = TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed })
+local Tween4 = TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV })
 
-	BaseWalkSpeed = ResWalkSpeed
-	Sprinting = false
-end)
+local function startS()
+	Tween1:Play()
+	Tween2:Play()
+	Tween3:Cancel()
+	Tween4:Cancel()
+end
+local function endS()
+	Tween3:Play()
+	Tween4:Play()
+	Tween1:Cancel()
+	Tween2:Cancel()
+end
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
@@ -68,27 +77,15 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Image = "rbxassetid://118709768438655"
 	SprintButton.Parent = JumpButtonFrame
 
-local Tween1 = TweenService:Create(Humanoid, Sine_InOut, { WalkSpeed = BaseWalkSpeed*WalkSpeedMultiplier })
-local Tween2 = TweenService:Create(Camera, Sine_InOut, { FieldOfView = BaseFOV*FovMultiplier })
+Player.CharacterAdded:Connect(function(char)
+	Character = char
+	Humanoid = Character:WaitForChild("Humanoid")
+	ResWalkSpeed = Humanoid.WalkSpeed
 
-local Tween3 = TweenService:Create(Humanoid, Expo_Out, { WalkSpeed = BaseWalkSpeed })
-local Tween4 = TweenService:Create(Camera, Expo_Out, { FieldOfView = BaseFOV })
-
-local function startS()
-	Tween1:Play()
-	Tween2:Play()
-
-	Tween3:Cancel()
-	Tween4:Cancel()
-end
-
-local function endS()
-	Tween3:Play()
-	Tween4:Play()
-
-	Tween1:Cancel()
-	Tween2:Cancel()
-end
+	BaseWalkSpeed = ResWalkSpeed
+	Sprinting = false
+	SprintButton.Image = "rbxassetid://118709768438655"
+end)
 
 SprintButton.MouseButton1Click:Connect(function()
 	if not Sprinting then Sprinting = true else Sprinting = false end
