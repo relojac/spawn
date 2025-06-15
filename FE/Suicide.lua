@@ -40,7 +40,11 @@ local SuicideButton = Instance.new("ImageButton")
 	SuicideButton.Parent = JumpButtonFrame
 
 local function suicide()
-	if not tween then Humanoid.Health = 0 else TweenService:Create(Humanoid, Expo_Out, { Health = 0 }):Play() end
+	if not tween then
+		Humanoid.Health = 0
+	else 
+		TweenService:Create(Humanoid, Expo_Out, { Health = 0 }):Play()
+	end
 end
 
 SuicideButton.MouseButton1Click:Connect(suicide)
