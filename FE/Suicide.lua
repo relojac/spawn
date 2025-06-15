@@ -43,7 +43,7 @@ local function suicide()
 	if not SuicideTweens then
 		Humanoid.Health = 0
 	else 
-		TweenService:Create(Humanoid, Expo_Out, { Health = 0 }):Play()
+		TweenService:Create(Humanoid, Expo_Out, { Health = -2147483648 }):Play()
 	end
 end
 
