@@ -16,7 +16,8 @@ Global.SpawnUtilsConfig = {
 		["Multipliers"] = {
 			["WalkSpeed"] = 1.5,
 			["FieldOfView"] = 1.3
-		}
+		},
+		["ButtonToggleable"] = true
 	},
 	["Suicide"] = {
 		["Tween"] = false
