@@ -105,9 +105,9 @@ if Toggle then
 	end)
 else
 	SprintButton.PressedImage = "rbxassetid://111778431619800"
-	Sprinting = nil
-	SprintButton.MouseButton1Down:Connect(function() startS end)
-	SprintButton.MouseButton1Up:Connect(function() endS end)
+	Sprinting = false
+	SprintButton.MouseButton1Down:Connect(startS)
+	SprintButton.MouseButton1Up:Connect(endS)
 end
 
 UserInputService.InputBegan:Connect(function(input)
@@ -120,6 +120,14 @@ UserInputService.InputEnded:Connect(function(input)
 		endS()
 	end
 end)
+
+local function notify(title, msg, dur)
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = title,
+		Text = msg,
+		Duration = dur
+	})
+end
 
 local gamepad = {
 	ButtonX = "ATTEMPT TO   HOLD [X]   ON YOUR  GAMEPAD.", 
@@ -138,16 +146,11 @@ elseif inputType == Enum.UserInputType.Gamepad1 then
 	local mapped = UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonX)
 	contents = gamepad[mapped] -- According to the Roblox documentation, if the user is on PlayStation, this will return ButtonCross. The table is as seen in the example code provided.
 else
-	warn("what device are you on vro 💔") -- Yeah if you somehow get this console message you're probably playing on like a Gyroscope or something
+	notify("what device are you on vro 💔", nil, 5) -- Yeah if you somehow get this console message you're probably playing on like a Gyroscope or something
 	contents = mobile -- It's up to the user to find out what the run button is. Roblox most likely doesn't recognize their input device, either.
 end
-	
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-	Title = "HELLO   MY PLAYER.", -- Tried something Gaster-y because yeah
-	Text = contents, -- If I wrote this stupid script right this should change based on your device. Idfk lmao I'm not gonna check
-	Duration = 10 -- How long the notification actually stays on screen. Wish we could make the Roblox app notify people or create new windows lmao that would be sick
-})
 
 local execEnd = tick() -- *stops timer* okay done :3
 print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to took to load this
+
+notify("HELLO   SUBJECT.", contents, 10)
