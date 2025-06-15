@@ -75,12 +75,12 @@ local SprintButton = Instance.new("ImageButton")
 	SprintButton.Parent = JumpButtonFrame
 
 Player.CharacterAdded:Connect(function(char)
-	Character = char
+	Character = Player.Character or Player.CharacterAdded:Wait() or char
 	Humanoid = Character:WaitForChild("Humanoid")
 	ResWalkSpeed = Humanoid.WalkSpeed
-
 	BaseWalkSpeed = ResWalkSpeed
-	Sprinting = false
+
+	if Sprinting ~= nil then Sprinting = false end
 	SprintButton.Image = "rbxassetid://118709768438655"
 end)
 
@@ -93,6 +93,8 @@ if Toggle then
 			startS()
 			SprintButton.Image = "rbxassetid://111778431619800"
 		else
+			Sprinting = nil
+			
 			endS() 
 			SprintButton.Image = "rbxassetid://118709768438655"
 		end
