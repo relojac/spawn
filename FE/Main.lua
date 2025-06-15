@@ -27,7 +27,6 @@ local GhostGui = Instance.new("ScreenGui", JumpButtonFrame) -- Used to get the A
 function inputUpdate()
 	local lastInput = UserInputService:GetLastInputType()
 
-	print(lastInput == Enum.UserInputType.Touch)
 	if lastInput == Enum.UserInputType.Focus then return end
 	JumpButtonFrame.Visible = lastInput == Enum.UserInputType.Touch
 end
