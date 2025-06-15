@@ -1,8 +1,20 @@
 local execStart = tick() -- *starts timer* okay time to write code
 
+local Global = (getgenv and getgenv()) or shared
+local Config = Global.Suicide
+
+local SuicideTweens = Config.Tween or false
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+local Expo_Out = TweenInfo.new(
+	0.5,
+	Enum.EasingStyle.Exponential,
+	Enum.EasingDirection.Out
+)
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
@@ -28,7 +40,7 @@ local SuicideButton = Instance.new("ImageButton")
 	SuicideButton.Parent = JumpButtonFrame
 
 local function suicide()
-	Humanoid.Health = -2147483648
+	if not tween then Humanoid.Health = 0 else TweenService:Create(Humanoid, Expo_Out, { Health = 0 }):Play() end
 end
 
 SuicideButton.MouseButton1Click:Connect(suicide)
