@@ -45,8 +45,11 @@ local HP = Instance.new("TextLabel", Frame)
 
 local Corner = Instance.new("UICorner", Frame)
 	Corner.CornerRadius = UDim.new(2, 0)
-local Corner2 = Instance.new("UICorner", Bar)
-	Corner.CornerRadius = UDim.new(2, 0)
+local Corner2 = Corner:Clone()
+	Corner2.Parent = Bar
+
+local Stroke = Instance.new("UIStroke", Frame)
+	
 
 RunService.Heartbeat:Connect(function()
 	HP.Text = tostring(math.round(Humanoid.Health))
