@@ -19,10 +19,10 @@ local HealthGui = Instance.new("ScreenGui", PlayerGui)
 
 local Frame = Instance.new("Frame", HealthGui)
 	Frame.Name = "HealthFrame"
-	Frame.Size = UDim2.new(0, 130, 0, 20)
-	Frame.Position = UDim2.new(0, 25, 1, -25)
-	Frame.AnchorPoint = Vector2.new(0, 1)
-	Frame.BackgroundTransparency = 1
+	Frame.Size = UDim2.new(0, 150, 0, 20)
+	Frame.Position = UDim2.new(0, 25, 1, -30)
+	Frame.AnchorPoint = Vector2.new(0.5, 1)
+	Frame.BackgroundColor3 = Color3.fromRgb(69, 69, 69)
 	Frame.ClipsDescendants = true
 
 local Bar = Instance.new("Frame", Frame)
@@ -39,7 +39,7 @@ local HP = Instance.new("TextLabel", Frame)
 	HP.BackgroundTransparency = 1
 	HP.Size = UDim2.new(0.5, 0, 1, 0)
 	HP.Position = UDim2.new(0, 5, 0, 0)
-	HP.TextSize = 8
+	HP.TextSize = 10
 	HP.TextXAlignment = Enum.TextXAlignment.Left
 	HP.ZIndex = 1
 
@@ -49,6 +49,10 @@ local Corner2 = Corner:Clone()
 	Corner2.Parent = Bar
 
 local Stroke = Instance.new("UIStroke", Frame)
+	Stroke.Color = Color3.fromRgb(69, 69, 69)
+	Stroke.Thickness = 2
+local Stroke2 = Stroke:Clone()
+	Stroke2.Parent = Bar
 	
 
 RunService.Heartbeat:Connect(function()
