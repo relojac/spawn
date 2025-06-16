@@ -18,7 +18,7 @@ local HealthGui = Instance.new("ScreenGui", PlayerGui)
 
 local Frame = Instance.new("Frame", HealthGui)
 	Frame.Name = "HealthFrame"
-	Frame.Size = UDim2.new(0, 180, 20)
+	Frame.Size = UDim2.new(0, 180, 0, 20)
 	Frame.Position = UDim2.new(0.5, 0, 0, 55)
 	Frame.AnchorPoint = Vector2.new(0.5, 0)
 	Frame.BackgroundColor3 = Color3.fromRGB(69, 69, 69)
