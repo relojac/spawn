@@ -26,11 +26,11 @@ local Frame = Instance.new("Frame", HealthGui)
 	Frame.ClipsDescendants = true
 
 local Bar = Instance.new("Frame", Frame)
-	Frame.Name = "HealthBar"
-	Frame.Size = UDim2.new(1, 0, 1, 0)
-	Frame.Position = UDim2.new(0, 0, 0, 0)
-	Frame.BackgroundColor3 = Color3.new(1, 0, 0)
-	Frame.BorderSizePixel = 0
+	Bar.Name = "HealthBar"
+	Bar.Size = UDim2.new(1, 0, 1, 0)
+	Bar.Position = UDim2.new(0, 0, 0, 0)
+	Bar.BackgroundColor3 = Color3.new(1, 0, 0)
+	Bar.BorderSizePixel = 0
 
 local HP = Instance.new("TextLabel", Frame)
 	HP.Name = "HP"
@@ -47,7 +47,7 @@ local Corner = Instance.new("UICorner", Frame)
 	Corner.CornerRadius = UDim.new(1, 0)
 
 RunService.Heartbeat:Connect(function()
-	HP.Text = tostring(round(Humanoid.Health))
+	HP.Text = tostring(math.round(Humanoid.Health))
 end)
 
 
