@@ -53,14 +53,14 @@ local Stroke2 = Stroke:Clone()
 	Stroke2.Parent = Bar
 
 Player.CharacterAdded:Connect(function(char)
-	Character = char
+	Character = char or Player.Character
 	Humanoid = Character:WaitForChild("Humanoid")
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 end)
 	
 
 RunService.Heartbeat:Connect(function()
-	HP.Text = tostring(math.round(Humanoid.Health))
+	HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
 end)
 
 
