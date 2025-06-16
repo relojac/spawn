@@ -19,17 +19,17 @@ local HealthGui = Instance.new("ScreenGui", PlayerGui)
 
 local Frame = Instance.new("Frame", HealthGui)
 	Frame.Name = "HealthFrame"
-	Frame.Size = UDim2.new(0, 150, 0, 20)
-	Frame.Position = UDim2.new(0, 25, 1, -30)
+	Frame.Size = UDim2.new(0, 200, 0, 20)
+	Frame.Position = UDim2.new(0, 0, 1, -35)
 	Frame.AnchorPoint = Vector2.new(0.5, 1)
-	Frame.BackgroundColor3 = Color3.fromRgb(69, 69, 69)
+	Frame.BackgroundColor3 = Color3.fromRGB(69, 69, 69)
 	Frame.ClipsDescendants = true
 
 local Bar = Instance.new("Frame", Frame)
 	Bar.Name = "HealthBar"
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 	Bar.Position = UDim2.new(0, 0, 0, 0)
-	Bar.BackgroundColor3 = Color3.new(1, 0, 0)
+	Bar.BackgroundColor3 = Color3.fromRGB(255, 95, 95)
 	Bar.BorderSizePixel = 0
 
 local HP = Instance.new("TextLabel", Frame)
@@ -49,7 +49,7 @@ local Corner2 = Corner:Clone()
 	Corner2.Parent = Bar
 
 local Stroke = Instance.new("UIStroke", Frame)
-	Stroke.Color = Color3.fromRgb(69, 69, 69)
+	Stroke.Color = Color3.fromRGB(69, 69, 69)
 	Stroke.Thickness = 2
 local Stroke2 = Stroke:Clone()
 	Stroke2.Parent = Bar
