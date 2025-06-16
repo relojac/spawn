@@ -7,11 +7,6 @@ local Character = Player.Character or Player.CharacterAdded:Wait()
 local PlayerGui = Player.PlayerGui
 local Humanoid = Character:WaitForChild("Humanoid")
 
-Player.CharacterAdded:Connect(function(char)
-	Character = char
-	Humanoid = Character:WaitForChild("Humanoid")
-end)
-
 for _, v in ipairs(PlayerGui:GetChildren()) do
 	if v:IsA("ScreenGui") and v.Name == "HealthGuiLocal" then v:Destroy() end
 end
@@ -56,6 +51,12 @@ local Stroke = Instance.new("UIStroke", Frame)
 	Stroke.Thickness = 3
 local Stroke2 = Stroke:Clone()
 	Stroke2.Parent = Bar
+
+Player.CharacterAdded:Connect(function(char)
+	Character = char
+	Humanoid = Character:WaitForChild("Humanoid")
+	Bar.Size = UDim2.new(1, 0, 1, 0)
+end)
 	
 
 RunService.Heartbeat:Connect(function()
