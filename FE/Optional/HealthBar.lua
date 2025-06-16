@@ -19,8 +19,8 @@ local HealthGui = Instance.new("ScreenGui", PlayerGui)
 
 local Frame = Instance.new("Frame", HealthGui)
 	Frame.Name = "HealthFrame"
-	Frame.Size = UDim2.new(0, 45, 0, 5)
-	Frame.Position = UDim2.new(20, -20, 1, 0)
+	Frame.Size = UDim2.new(0, 130, 0, 20)
+	Frame.Position = UDim2.new(0, 25, 1, -25)
 	Frame.AnchorPoint = Vector2.new(0, 1)
 	Frame.BackgroundTransparency = 1
 	Frame.ClipsDescendants = true
@@ -44,7 +44,9 @@ local HP = Instance.new("TextLabel", Frame)
 	HP.ZIndex = 1
 
 local Corner = Instance.new("UICorner", Frame)
-	Corner.CornerRadius = UDim.new(1, 0)
+	Corner.CornerRadius = UDim.new(2, 0)
+local Corner2 = Instance.new("UICorner", Bar)
+	Corner.CornerRadius = UDim.new(2, 0)
 
 RunService.Heartbeat:Connect(function()
 	HP.Text = tostring(math.round(Humanoid.Health))
