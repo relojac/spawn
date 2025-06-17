@@ -4,6 +4,8 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
+local FirstPersonLock = false
+
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local HapticEffect = Instance.new("HapticEffect", workspace)
@@ -45,22 +47,20 @@ end
 
 local function zoom()
 	-- hapt() -- as much as i would've loved to use this, HapticEffects aren't released yet despite the documentation on it.
-	if Player.CameraMode ~= "LockFirstPerson" then
-		Player.CameraMode = "LockFirstPerson"
-	else
-		Player.CameraMode = "Classic"
-	end
+	if not FirstPersonLock then FirstPersonLock = true else FirstPersonLock = false end
 end
 
 RunService.Heartbeat:Connect(function()
-	if Player.CameraMode == "LockFirstPerson" then
+	if FirstPersonLock then
 		ZoomButton.Image = "rbxassetid://125086742998263"
 		Zoom.Text = "1st"
 		Player.CameraMaxZoomDistance = 0
+		Player.CameraMode = "FirstPersonLock"
 	else
 		ZoomButton.Image = "rbxassetid://120316668670756"
 		Zoom.Text = "3rd"
 		Player.CameraMaxZoomDistance = math.huge
+		Player.CameraMode = "Classic"
 	end
 end)
 
