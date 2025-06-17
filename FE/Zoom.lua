@@ -55,16 +55,14 @@ RunService.Heartbeat:Connect(function()
 	if FirstPersonLock then
 		ZoomButton.Image = "rbxassetid://125086742998263"
 		Zoom.Text = "1st"
-		Player.CameraMaxZoomDistance = 0
-		Player.CameraMode = "LockFirstPerson"
+		Player.CameraMode = Enum.CameraMode.LockFirstPerson
 		MaxZoom = true
 	else
 		ZoomButton.Image = "rbxassetid://120316668670756"
 		Zoom.Text = "3rd"
 		if MaxZoom then
 			MaxZoom = false
-			Player.CameraMode = "Classic"
-			Player.CameraMaxZoomDistance = math.huge
+			Player.CameraMode = Enum.CameraMode.Classic
 			Player.CameraMinZoomDistance = 50
 			task.wait(0.5)
 			Player.CameraMinZoomDistance = 0
