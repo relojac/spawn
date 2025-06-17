@@ -52,21 +52,27 @@ local Stroke = Instance.new("UIStroke", Frame)
 local Stroke2 = Stroke:Clone()
 	Stroke2.Parent = Bar
 
-Player.CharacterAdded:Connect(function(char)
-	Character = char or Player.Character
-	Humanoid = Character:WaitForChild("Humanoid")
-	Bar.Size = UDim2.new(1, 0, 1, 0)
-end)
-	
+local ease = TweenInfo.new(
+	Humanoid.Health / Humanoid.MaxHealth,
+	Enum.EasingStyle.Exponential,
+	Enum.EasingDirection.Out,
+	0,
+	false,
+	0
+)
+local health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, 0, 1) 
+local Tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)})
 
 RunService.Heartbeat:Connect(function()
 	HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
 end)
 
+Player.CharacterAdded:Connect(function(char)
+	Character = char or Player.Character
+	Humanoid = Character:WaitForChild("Humanoid")
+	Bar.Size = UDim2.new(1, 0, 1, 0)
 
-local function updateBar()
-	local health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, -2147483648, 1)
-	local ease = TweenInfo.new(
+	ease  = TweenInfo.new(
 		Humanoid.Health / Humanoid.MaxHealth,
 		Enum.EasingStyle.Exponential,
 		Enum.EasingDirection.Out,
@@ -74,8 +80,14 @@ local function updateBar()
 		false,
 		0
 	)
-	
-	TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)}):Play()
+
+	health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, 0, 1)
+	Tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)}):Play()
+end)
+
+
+local function updateBar()
+	Tween:Play()
 end
 
 updateBar()
