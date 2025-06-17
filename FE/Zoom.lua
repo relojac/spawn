@@ -44,10 +44,10 @@ end
 
 RunService.Heartbeat:Connect(function()
 	if Player.CameraMode == "LockFirstPerson" then
-		StunButton.Image = "rbxassetid://125086742998263"
+		ZoomButton.Image = "rbxassetid://125086742998263"
 		Player.CameraMaxZoomDistance = 0
 	else
-		StunButton.Image = "rbxassetid://120316668670756"
+		ZoomButton.Image = "rbxassetid://120316668670756"
 		Player.CameraMaxZoomDistance = math.huge
 	end
 end)
