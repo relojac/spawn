@@ -44,7 +44,7 @@ local function hapt()
 end
 
 local function zoom()
-	hapt()
+	-- hapt() -- as much as i would've loved to use this, HapticEffects aren't released yet despite the documentation on it.
 	if Player.CameraMode ~= "LockFirstPerson" then
 		Player.CameraMode = "LockFirstPerson"
 	else
