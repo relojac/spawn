@@ -21,7 +21,7 @@ local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
 local ZoomButton = Instance.new("ImageButton")
-	ZoomButton.Name = "StunButton"
+	ZoomButton.Name = "ZoomButton"
 	ZoomButton.Position = UDim2.new(-3.3, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	ZoomButton.Size = UDim2.new(1, 0, 1, 0)
 	ZoomButton.BackgroundTransparency = 1
