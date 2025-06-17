@@ -6,6 +6,9 @@ local RunService = game:GetService("RunService")
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
+local HapticEffect = Instance.new("HapticEffect", workspace)
+	HapticEffect.Type = Enum.HapticEffectType.UIClick
+	HapticEffect.Looped = true
 
 Player.CameraMinZoomDistance = 0
 Player.CameraMaxZoomDistance = math.huge
@@ -34,7 +37,14 @@ local Zoom = Instance.new("TextLabel")
 	Zoom.ZIndex = 1
 	Zoom.Parent = ZoomButton
 
+local function hapt()
+	HapticEffect:Play()
+	task.wait(0.25)
+	HapticEffect:Stop()
+end
+
 local function zoom()
+	hapt()
 	if Player.CameraMode ~= "LockFirstPerson" then
 		Player.CameraMode = "LockFirstPerson"
 	else
