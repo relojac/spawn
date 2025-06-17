@@ -45,9 +45,11 @@ end
 RunService.Heartbeat:Connect(function()
 	if Player.CameraMode == "LockFirstPerson" then
 		ZoomButton.Image = "rbxassetid://125086742998263"
+		Zoom.Text = "1st"
 		Player.CameraMaxZoomDistance = 0
 	else
 		ZoomButton.Image = "rbxassetid://120316668670756"
+		Zoom.Text = "3rd"
 		Player.CameraMaxZoomDistance = math.huge
 	end
 end)
