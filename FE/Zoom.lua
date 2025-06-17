@@ -1,4 +1,4 @@
-locallocal execStart = tick() -- *starts timer* okay time to write code
+local execStart = tick() -- *starts timer* okay time to write code
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
