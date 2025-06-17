@@ -59,7 +59,12 @@ RunService.Heartbeat:Connect(function()
 	else
 		ZoomButton.Image = "rbxassetid://120316668670756"
 		Zoom.Text = "3rd"
-		Player.CameraMaxZoomDistance = math.huge
+		if Player.CameraMaxZoomDistance == 0 then
+			Player.CameraMaxZoomDistance = math.huge
+			Player.CameraMinZoomDistance = 30
+			task.wait()
+			Player.CameraMinZoomDistance = 0
+		end
 		Player.CameraMode = "Classic"
 	end
 end)
