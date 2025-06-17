@@ -10,6 +10,9 @@ for _, v in ipairs(PlayerGui:GetChildren()) do
 	if v:IsA("ScreenGui") and v.Name == "HealthGuiLocal" then v:Destroy() end
 end
 
+local Black = Color3.new(0, 0, 0)
+local White = Color3.new(1, 1, 1)
+
 local HealthGui = Instance.new("ScreenGui", PlayerGui)
 	HealthGui.Name = "HealthGuiLocal"
 	HealthGui.ResetOnSpawn = false
@@ -40,6 +43,8 @@ local HP = Instance.new("TextLabel", Frame)
 	HP.TextSize = 13
 	HP.TextXAlignment = Enum.TextXAlignment.Left
 	HP.ZIndex = 1002
+	HP.TextStrokeTransparency = 0
+	HP.TextStrokeColor3 = Black
 
 local Corner = Instance.new("UICorner", Frame)
 	Corner.CornerRadius = UDim.new(2, 0)
