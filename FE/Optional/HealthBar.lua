@@ -59,23 +59,23 @@ RunService.Heartbeat:Connect(function()
 	end
 end)
 
+local function updateBar(hum)
+	local health = math.clamp(hum.Health / hum.MaxHealth, 0, 1)
+	local ease = TweenInfo.new(
+		1,
+		Enum.EasingStyle.Exponential,
+		Enum.EasingDirection.Out
+	)
+	local tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(hum.Health, 1)})
+	tween:Play()
+end
+
 Player.CharacterAdded:Connect(function(char)
 	Character = char
 	Humanoid = Character:WaitForChild("Humanoid")
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 
-	local function updateBar()
-		local health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, 0, 1)
-		local ease = TweenInfo.new(
-			1,
-			Enum.EasingStyle.Exponential,
-			Enum.EasingDirection.Out
-		)
-		local tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)})
-		tween:Play()
-	end
-
-	updateBar()
+	updateBar(Humanoid)
 
 	Humanoid:GetPropertyChangedSignal("Health"):Connect(updateBar)
 	Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(updateBar)
