@@ -13,7 +13,6 @@ end
 local HealthGui = Instance.new("ScreenGui", PlayerGui)
 	HealthGui.Name = "HealthGuiLocal"
 	HealthGui.ResetOnSpawn = false
-	HealthGui.IgnoreGuiInset = true
 
 local Frame = Instance.new("Frame", HealthGui)
 	Frame.Name = "HealthFrame"
