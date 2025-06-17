@@ -28,7 +28,7 @@ local Bar = Instance.new("Frame", Frame)
 	Bar.Name = "HealthBar"
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 	Bar.Position = UDim2.new(0, 0, 0, 0)
-	Bar.BackgroundColor3 = Color3.fromRGB(255, 95, 95)
+	Bar.BackgroundColor3 = Color3.fromRGB(95, 255, 95)
 
 local HP = Instance.new("TextLabel", Frame)
 	HP.Name = "HP"
@@ -53,7 +53,10 @@ local Stroke2 = Stroke:Clone()
 	Stroke2.Parent = Bar
 
 RunService.Heartbeat:Connect(function()
-	HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
+	if Humanoid or Character:FindFirstChildOfClass("Humanoid") then
+		HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
+		Bar.BackgroundColor3 = Color3.fromRGB(95, 255, 95):Lerp(Color3.fromRGB(255, 95, 95), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
+	end
 end)
 
 Player.CharacterAdded:Connect(function(char)
@@ -64,7 +67,7 @@ Player.CharacterAdded:Connect(function(char)
 	local function updateBar()
 		local health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, 0, 1)
 		local ease = TweenInfo.new(
-			0.5, -- use a fixed tween time
+			0.3, -- use a fixed tween time
 			Enum.EasingStyle.Exponential,
 			Enum.EasingDirection.Out
 		)
@@ -74,6 +77,7 @@ Player.CharacterAdded:Connect(function(char)
 
 	updateBar()
 
+	-- Connect fresh signals to this Humanoid
 	Humanoid:GetPropertyChangedSignal("Health"):Connect(updateBar)
 	Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(updateBar)
 	Humanoid.Died:Connect(updateBar)
