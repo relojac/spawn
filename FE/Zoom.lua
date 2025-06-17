@@ -39,7 +39,7 @@ local Zoom = Instance.new("TextLabel")
 	Zoom.TextStrokeColor3 = Color3.new(0, 0, 0)
 	Zoom.TextStrokeTransparency = 0
 	Zoom.ZIndex = 1
-	Zoom.Parent = StunButton
+	Zoom.Parent = ZoomButton
 
 local function zoom()
 	if Player.CameraMode ~= "LockFirstPerson" then
