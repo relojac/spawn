@@ -22,3 +22,5 @@ Character.ChildAdded:Connect(function(v)
 
 	v.LocalTransparencyModifier = 0
 end)
+
+Player.CharacterAdded:Connect(function(char) Character = char or Player.Character end)
