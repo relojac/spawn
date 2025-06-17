@@ -68,7 +68,7 @@ RunService.Heartbeat:Connect(function()
 end)
 
 Player.CharacterAdded:Connect(function(char)
-	Character = char or Player.Character
+	Character = char
 	Humanoid = Character:WaitForChild("Humanoid")
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 
@@ -82,7 +82,7 @@ Player.CharacterAdded:Connect(function(char)
 	)
 
 	health = math.clamp(Humanoid.Health / Humanoid.MaxHealth, 0, 1)
-	Tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)}):Play()
+	Tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(health, 1)})
 end)
 
 
@@ -94,3 +94,4 @@ updateBar()
 
 Humanoid:GetPropertyChangedSignal("Health"):Connect(updateBar)
 Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(updateBar)
+Humanoid.Died:Connect(updateBar)
