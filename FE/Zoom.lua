@@ -68,4 +68,4 @@ UserInputService.InputBegan:Connect(function(input)
 end)
 
 local execEnd = tick() -- *stops timer* okay done :3
-print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to to ok t o load this execStart = tick() -- *starts timer* okay time to write code
+print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to to ok t o load this
