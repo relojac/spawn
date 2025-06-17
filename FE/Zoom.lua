@@ -6,16 +6,9 @@ local RunService = game:GetService("RunService")
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local Character = Player.Character or Player.CharacterAdded:Wait()
-local Humanoid = Character:WaitForChild("Humanoid")
 
 Player.CameraMinZoomDistance = 0
 Player.CameraMaxZoomDistance = math.huge
-
-Player.CharacterAdded:Connect(function(char)
-	Character = char
-	Humanoid = Character:WaitForChild("Humanoid")
-end)
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
