@@ -63,12 +63,12 @@ RunService.Heartbeat:Connect(function()
 		Zoom.Text = "3rd"
 		if MaxZoom then
 			MaxZoom = false
+			Player.CameraMode = "Classic"
 			Player.CameraMaxZoomDistance = math.huge
 			Player.CameraMinZoomDistance = 50
 			task.wait(0.5)
 			Player.CameraMinZoomDistance = 0
 		end
-		Player.CameraMode = "UserChoice"
 	end
 end)
 
