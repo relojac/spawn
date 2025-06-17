@@ -55,7 +55,7 @@ RunService.Heartbeat:Connect(function()
 		ZoomButton.Image = "rbxassetid://125086742998263"
 		Zoom.Text = "1st"
 		Player.CameraMaxZoomDistance = 0
-		Player.CameraMode = "FirstPersonLock"
+		Player.CameraMode = "LockFirstPerson"
 	else
 		ZoomButton.Image = "rbxassetid://120316668670756"
 		Zoom.Text = "3rd"
