@@ -22,7 +22,7 @@ local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This ha
 
 local ZoomButton = Instance.new("ImageButton")
 	ZoomButton.Name = "StunButton"
-	ZoomButton.Position = UDim2.new(-2.2, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
+	ZoomButton.Position = UDim2.new(-3.3, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	ZoomButton.Size = UDim2.new(1, 0, 1, 0)
 	ZoomButton.BackgroundTransparency = 1
 	ZoomButton.Active = true
