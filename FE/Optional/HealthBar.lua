@@ -77,7 +77,7 @@ Player.CharacterAdded:Connect(function(char)
 
 	updateBar(Humanoid)
 
-	Humanoid:GetPropertyChangedSignal("Health"):Connect(updateBar)
-	Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(updateBar)
-	Humanoid.Died:Connect(updateBar)
+	Humanoid:GetPropertyChangedSignal("Health"):Connect(function() updateBar(Humanoid) end) 
+	Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(function() updateBar(Humanoid) end) 
+	Humanoid.Died:Connect(function() updateBar(Humanoid) end)
 end)
