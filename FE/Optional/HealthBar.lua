@@ -22,12 +22,14 @@ local Frame = Instance.new("Frame", HealthGui)
 	Frame.AnchorPoint = Vector2.new(0.5, 0)
 	Frame.BackgroundColor3 = Color3.fromRGB(69, 69, 69)
 	Frame.ClipsDescendants = true
+	Frame.ZIndex = 1000
 
 local Bar = Instance.new("Frame", Frame)
 	Bar.Name = "HealthBar"
 	Bar.Size = UDim2.new(1, 0, 1, 0)
 	Bar.Position = UDim2.new(0, 0, 0, 0)
 	Bar.BackgroundColor3 = Color3.fromRGB(95, 255, 95)
+	Bar.ZIndex = 1001
 
 local HP = Instance.new("TextLabel", Frame)
 	HP.Name = "HP"
@@ -38,7 +40,7 @@ local HP = Instance.new("TextLabel", Frame)
 	HP.Position = UDim2.new(0, 10, 0, 0)
 	HP.TextSize = 13
 	HP.TextXAlignment = Enum.TextXAlignment.Left
-	HP.ZIndex = 1
+	HP.ZIndex = 1002
 
 local Corner = Instance.new("UICorner", Frame)
 	Corner.CornerRadius = UDim.new(2, 0)
@@ -55,7 +57,7 @@ RunService.Heartbeat:Connect(function()
 	if Humanoid or Character:FindFirstChildOfClass("Humanoid") then
 		HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
 		Bar.BackgroundColor3 = Color3.fromRGB(255, 95, 95):Lerp(Color3.fromRGB(95, 255, 95), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
-		Bar.Size = UDim2.new(1, 0, 1, 0):Lerp(UDim2.new(0, 0, 1, 0), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
+		Bar.Size = UDim2.new(0, 0, 1, 0):Lerp(UDim2.new(1, 0, 1, 0), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
 	end
 end)
 
