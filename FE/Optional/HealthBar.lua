@@ -1,4 +1,3 @@
-local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService") 
 local Players = game:GetService("Players")
 
@@ -56,28 +55,12 @@ RunService.Heartbeat:Connect(function()
 	if Humanoid or Character:FindFirstChildOfClass("Humanoid") then
 		HP.Text = tostring(math.round(Character:WaitForChild("Humanoid").Health))
 		Bar.BackgroundColor3 = Color3.fromRGB(255, 95, 95):Lerp(Color3.fromRGB(95, 255, 95), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
+		Bar.Size = UDim2.new(1, 0, 1, 0):Lerp(UDim2.new(0, 0, 1, 0), math.clamp(Humanoid.Health/Humanoid.MaxHealth, 0, 1))
 	end
 end)
 
-local function updateBar(hum)
-	local health = math.clamp(hum.Health / hum.MaxHealth, 0, 1)
-	local ease = TweenInfo.new(
-		1,
-		Enum.EasingStyle.Exponential,
-		Enum.EasingDirection.Out
-	)
-	local tween = TweenService:Create(Bar, ease, {Size = UDim2.fromScale(hum.Health, 1)})
-	tween:Play()
-end
-
 Player.CharacterAdded:Connect(function(char)
-	Character = char
+	Character = char or Player.Character
 	Humanoid = Character:WaitForChild("Humanoid")
 	Bar.Size = UDim2.new(1, 0, 1, 0)
-
-	updateBar(Humanoid)
-
-	Humanoid:GetPropertyChangedSignal("Health"):Connect(function() updateBar(Humanoid) end) 
-	Humanoid:GetPropertyChangedSignal("MaxHealth"):Connect(function() updateBar(Humanoid) end) 
-	Humanoid.Died:Connect(function() updateBar(Humanoid) end)
 end)
