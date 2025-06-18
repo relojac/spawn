@@ -27,6 +27,7 @@ Global.Values = {
 	["FirstPersonLock"] = false
 }
 Global.Optional = {
+	["FunnyMode"] = false,
 	["HealthBar"] = true,
 	["ShowLimbsInFP"] = true,
 	["InfiniteYield"] = true -- this is the only script i didn't write. made by EdgeIY
