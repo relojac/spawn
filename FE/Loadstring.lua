@@ -28,7 +28,8 @@ Global.Values = {
 }
 Global.Optional = {
 	["HealthBar"] = true,
-	["ShowLimbsInFP"] = true
+	["ShowLimbsInFP"] = true,
+	["InfiniteYield"] = true -- this is the only script i didn't write. made by EdgeIY
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Main.lua"))()
