@@ -63,8 +63,8 @@ RunService.Heartbeat:Connect(function()
 		if MaxZoom then
 			MaxZoom = false
 			Player.CameraMode = Enum.CameraMode.Classic
-			Player.CameraMinZoomDistance = 50
-			task.wait(0.5)
+			Player.CameraMinZoomDistance = 20
+			task.wait()
 			Player.CameraMinZoomDistance = 0
 		end
 	end
