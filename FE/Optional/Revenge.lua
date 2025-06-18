@@ -69,9 +69,11 @@ Player.Character:WaitForChild("Humanoid").Died:Connect(function()
 			hl.FillTransparency = 0.5
 
 		creatorChar.Humanoid.Died:Connect(function()
-			hl:Destroy()
-			if plr.Character then
-				TweenCam(plr.
+			if hl then
+				hl:Destroy()
+				if plr.Character then
+					TweenCam(plr.Character.Humanoid)
+				end
 			end
 		end) 
 	end
