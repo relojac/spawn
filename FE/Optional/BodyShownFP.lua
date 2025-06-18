@@ -1,23 +1,37 @@
-local Player = game:GetService("Players").LocalPlayer
+local Players = game:GetService("Players")
 
-for _, v in Player.Character:GetChildren() do
-	if not v:IsA("BasePart") or v.Name == "Torso" then
-		continue
+local Player = Players.LocalPlayer
+
+local function transparencyFix(char)
+	for _, v in char:GetChildren() do
+		if not v:IsA("BasePart") or v.Name == "Torso" or v.Name == "UpperTorso" or v.Name == "LowerTorso" then
+			continue
+		end
+
+		v:GetPropertyChangedSignal("LocalTransparencyModifier"):Connect(function()
+			v.LocalTransparencyModifier = 0
+		end)
+
+		v.LocalTransparencyModifier = 0
 	end
-	v:GetPropertyChangedSignal("LocalTransparencyModifier"):Connect(function()
+
+	char.ChildAdded:Connect(function(v)
+		if not v:IsA("BasePart") or v.Name == "Torso" or v.Name == "UpperTorso" or v.Name == "LowerTorso" then
+			return
+		end
+
+		v:GetPropertyChangedSignal("LocalTransparencyModifier"):Connect(function()
+			v.LocalTransparencyModifier = 0
+		end)
+
 		v.LocalTransparencyModifier = 0
 	end)
-	
-	v.LocalTransparencyModifier = 0
 end
 
-Player.Character.ChildAdded:Connect(function(v)
-	if not v:IsA("BasePart") or v.Name == "Torso" then
-		return
-	end
-	v:GetPropertyChangedSignal("LocalTransparencyModifier"):Connect(function()
-		v.LocalTransparencyModifier = 0
-	end)
+-- Initial character
+if Player.Character then
+	transparencyFix(Player.Character)
+end
 
-	v.LocalTransparencyModifier = 0
-end)
+-- On respawn
+Player.CharacterAdded:Connect(applyTransparencyFix)
