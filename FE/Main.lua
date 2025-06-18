@@ -62,3 +62,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/he
 loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Zoom.lua"))()
 if Optional.HealthBar then loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Optional/HealthBar.lua"))() end
 if Optional.ShowLimbsInFP then loadstring(game:HttpGet("https://raw.githubusercontent.com/relojac/spawn/refs/heads/main/FE/Optional/BodyShownFP.lua"))() end
+if Optional.InfiniteYield then loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source"))() end
