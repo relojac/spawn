@@ -1,10 +1,14 @@
 local execStart = tick() -- *starts timer* okay time to write code
 
+local Global = (getgenv and getgenv()) or shared
+
+Global.Values = {}
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
-local FirstPersonLock = false
+Global.Values.FirstPersonLock = false
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
@@ -52,7 +56,7 @@ end
 
 local MaxZoom = true
 RunService.Heartbeat:Connect(function()
-	if FirstPersonLock then
+	if Global.Values.FirstPersonLock then
 		ZoomButton.Image = "rbxassetid://125086742998263"
 		Zoom.Text = "1st"
 		Player.CameraMode = Enum.CameraMode.LockFirstPerson
