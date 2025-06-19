@@ -6,6 +6,7 @@ local Optional = Global.Optional
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+local TestService = game:GetService("TestService")
 
 local Player = Players.LocalPlayer -- Player
 local PlayerGui = Player.PlayerGui -- Gui Objects
@@ -49,7 +50,8 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
-print("isSmallScreen", isSmallScreen)
+print("found the jump Button")
+	TestService:Message(screenSize, "-", minAxis, "-", isSmallScreen, "-", jumpButtonSize)
 
 local execEnd = tick()
 print("Loaded main GUI in", tostring(execEnd-execStart) .. ".")
