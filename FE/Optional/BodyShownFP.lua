@@ -34,4 +34,4 @@ if Player.Character then
 end
 
 -- On respawn
-Player.CharacterAdded:Connect(applyTransparencyFix)
+Player.CharacterAdded:Connect(transparencyFix)
