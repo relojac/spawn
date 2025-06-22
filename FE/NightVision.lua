@@ -6,6 +6,8 @@ local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 
+local Ambient = Color3.fromRGB(153, 255, 208)
+
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 
@@ -36,7 +38,7 @@ local NV = Instance.new("TextLabel")
 local NVE_1 = Instance.new("ColorCorrectionEffect", Lighting)
 	NVEffect.Name = "NVE_1"
 	NVEffect.Enabled = false
-	NVEffect.TintColor = Color3.fromRGB(153, 255, 208)
+	NVEffect.TintColor = Ambient
 	NVEffect.Contrast = 0.2
 	NVEffect.Saturation = -1
 
@@ -47,19 +49,61 @@ local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
-	Vignette.ImageTransparenxy = 0.8
-	Vignette.Image = "" -- placeholder first
+	Vignette.ImageTransparenxy = 0.5
+	Vignette.Image = "rbxassetid://113537235654608"
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
 
 local SoundOn = Instance.new("Sound", SoundService)
-	SoundOn.SoundId = ""
+	SoundOn.SoundId = "rbxassetid://376178316"
 local SoundOff = Instance.new("Sound", SoundService)
-	SoundOff.SoundId = "" 
+	SoundOff.SoundId = "rbxassetid://79003354998655"
 
 local nv = false
 local function nvon()
-	if not nv then nv = true else nv = false end
+	if not nv then
+		nv = true
+		SoundOn:Play()
+	else
+		nv = false
+		SoundOff:Play()
+	end
 end
+
+local function hl(Character)
+	local NV_hl = Instance.new("Highlight", Character)
+		NV_hl.Name = "NV_hl"
+		NV_hl.FillTransparency = 1
+		NV_hl.Enabled = nv
+
+	if NV_hl then
+		while true do
+			task.wait()
+			NV_hl.Enabled = nv
+
+			if not NV_hl then break end
+		end
+	end
+end
+
+for _, plr in ipairs(Players:GetChildren()) do
+	local Character = plr.Character or plr.CharacterAdded:Wait()
+
+	if plr.Name ~= Player.Name then
+		hl(Character)
+	end
+
+	plr.CharacterAdded:Connect(hl)
+end
+
+Players.PlayerAdded:Connect(function(plr)
+	local Character = plr.Character or plr.CharacterAdded:Wait()
+
+	if plr.Name ~= Player.Name then
+		hl(Character)
+	end
+
+	plr.CharacterAdded:Connect(hl)
+end)
 
 RunService.Heartbeat:Connect(function()
 	if nv then
