@@ -77,6 +77,7 @@ local function hl(Character)
 	local NV_hl = Instance.new("Highlight", Character)
 		NV_hl.Name = "NV_hl"
 		NV_hl.FillTransparency = 1
+		NV_hl.OutlineColor = Ambient
 		NV_hl.Enabled = false
 
 	if NV_hl then
