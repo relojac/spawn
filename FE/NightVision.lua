@@ -43,6 +43,7 @@ local NVE = Instance.new("ColorCorrectionEffect", Lighting)
 	NVE.TintColor = Ambient
 	NVE.Contrast = 0.2
 	NVE.Saturation = -1
+	NVE.Brightness = 0.5
 
 local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 	VignetteGui.Name = "VignetteGuiLocal"
@@ -51,15 +52,14 @@ local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
-	Vignette.ImageTransparency = 0.5
 	Vignette.Image = "rbxassetid://113537235654608"
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
 	Vignette.BackgroundTransparency = 1
 
-local SoundOn = Instance.new("Sound", game.SoundService)
+local SoundOn = Instance.new("Sound", SoundService)
 	SoundOn.Name = "NightVisionOn"
 	SoundOn.SoundId = "rbxassetid://376178316"
-local SoundOff = Instance.new("Sound", game.SoundService)
+local SoundOff = Instance.new("Sound", SoundService)
 	SoundOn.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
