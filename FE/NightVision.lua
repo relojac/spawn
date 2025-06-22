@@ -25,67 +25,77 @@ local NVButton = Instance.new("ImageButton", JumpButtonFrame)
 	NVButton.Active = true
 	NVButton.Image = "rbxassetid://120316668670756"
 
-local NV = Instance.new("TextLabel", NVButton)
-	NV.Name = "NVText" 
-	NV.Size = UDim2.new(1, 0, 1, 0)
-	NV.Text = "Night\nVision"
-	NV.BackgroundTransparency = 1
-	NV.TextSize = 11
-	NV.TextColor3 = Color3.new(1, 1, 1)
-	NV.TextStrokeColor3 = Color3.new(0, 0, 0)
-	NV.TextStrokeTransparency = 0
-	NV.ZIndex = 1
-	NV.Active = false
+local NVText = Instance.new("TextLabel", NVButton)
+	NVText.Name = "NVText" 
+	NVText.Size = UDim2.new(1, 0, 1, 0)
+	NVText.Text = "Night\nVision"
+	NVText.BackgroundTransparency = 1
+	NVText.TextSize = 11
+	NVText.TextColor3 = Color3.new(1, 1, 1)
+	NVText.TextStrokeColor3 = Color3.new(0, 0, 0)
+	NVText.TextStrokeTransparency = 0
+	NVText.ZIndex = 1
+	NVText.Active = false
 
-local NVE_1 = Instance.new("ColorCorrectionEffect", Lighting)
-	NVE_1.Name = "NVE_1"
-	NVE_1.Enabled = false
-	NVE_1.TintColor = Ambient
-	NVE_1.Contrast = 0.2
-	NVE_1.Saturation = -1
+local NVE = Instance.new("ColorCorrectionEffect", Lighting)
+	NVE.Name = "NVE_1"
+	NVE.Enabled = false
+	NVE.TintColor = Ambient
+	NVE.Contrast = 0.2
+	NVE.Saturation = -1
 
 local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 	VignetteGui.Name = "VignetteGuiLocal"
-	VignetteGui.IgnoreGuiInset = false
-	VignetteGui.Enabled = false
+	VignetteGui.IgnoreGuiInset = true
+	VignetteGui.Enabled = true
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
 	Vignette.ImageTransparency = 0.5
 	Vignette.Image = "rbxassetid://113537235654608"
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
-	Vignette.BackgroundTransparency = 1
+	Vignette.BackgroundTransparency = 0.5
 
-local SoundOn = Instance.new("Sound", SoundService)
+local SoundOn = Instance.new("Sound", PlayerGui)
+	SoundOn.Name = "NightVisionOn"
 	SoundOn.SoundId = "rbxassetid://376178316"
-local SoundOff = Instance.new("Sound", SoundService)
+local SoundOff = Instance.new("Sound", PlayerGui)
+	SoundOn.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local nv_t = false
-local function nvon()
-	print("Toggled", nv_t)
-	if nv_t == false then
-		nv_t = true
-		SoundOn:Stop() SoundOn:Play()
+local nv = false
+local function nvtoggle()
+	print("Toggled", nv)
+	if not nv then
+		nv = true
+		SoundOn:Play()
+
+		NVButton.Image = "rbxassetid://125086742998263"
+		if Config.Vignette then VignetteGui.Enabled = true end
+		if Config.ColorCorrection then NVE.Enabled = true end
 	else
-		nv_t = false
-		SoundOff:Stop() SoundOff:Play()
+		nv = false
+		SoundOff:Play()
+
+		NVButton.Image = "rbxassetid://120316668670756"
+		VignetteGui.Enabled = false
+		NVE.Enabled = false
 	end
 end
 
-local function hl(Character)
-	local NV_hl = Instance.new("Highlight", Character)
+local function hl(ch)
+	local Highlight = Instance.new("Highlight", ch)
 		NV_hl.Name = "NV_hl"
 		NV_hl.FillTransparency = 1
 		NV_hl.OutlineColor = Ambient
 		NV_hl.Enabled = false
 
-	if NV_hl then
+	if Highlight then
 		if Config.Highlights then
 			local loop = RunService.RenderStepped:Connect(function()
-				NV_hl.Enabled = nv_t
+				Highlihht.Enabled = nv
 				
-				if not NV_hl then loop:Disconnect() end
+				if not Highlight then loop:Disconnect() end
 			end)
 		end
 	end
@@ -97,7 +107,6 @@ for _, plr in ipairs(Players:GetChildren()) do
 	if plr.Name ~= Player.Name then
 		hl(Character)
 	end
-
 	plr.CharacterAdded:Connect(hl)
 end
 
@@ -111,23 +120,11 @@ Players.PlayerAdded:Connect(function(plr)
 	plr.CharacterAdded:Connect(hl)
 end)
 
-RunService.Heartbeat:Connect(function()
-	if nv == true then
-		NVButton.Image = "rbxassetid://125086742998263"
-		if Config.Vignette then VignetteGui.Enabled = true end
-		if Config.ColorCorrection then NVE_1.Enabled = true end
-	else
-		NVButton.Image = "rbxassetid://120316668670756"
-		VignetteGui.Enabled = false
-		NVE_1.Enabled = false
-	end
-end)
-
-NVButton.MouseButton1Click:Connect(nvon)
+NVButton.MouseButton1Click:Connect(nvtoggle)
 
 UserInputService.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.KeypadSeven then
-		nvon()
+		nvtoggle()
 	end
 end)
 
