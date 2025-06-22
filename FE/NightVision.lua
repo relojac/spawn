@@ -39,11 +39,11 @@ local NV = Instance.new("TextLabel")
 	NV.Parent = NVButton
 
 local NVE_1 = Instance.new("ColorCorrectionEffect", Lighting)
-	NVEffect.Name = "NVE_1"
-	NVEffect.Enabled = false
-	NVEffect.TintColor = Ambient
-	NVEffect.Contrast = 0.2
-	NVEffect.Saturation = -1
+	NVE_1.Name = "NVE_1"
+	NVE_1.Enabled = false
+	NVE_1.TintColor = Ambient
+	NVE_1.Contrast = 0.2
+	NVE_1.Saturation = -1
 
 local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 	VignetteGui.Name = "VignetteGuiLocal"
