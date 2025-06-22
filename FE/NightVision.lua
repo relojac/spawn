@@ -56,10 +56,10 @@ local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
 	Vignette.BackgroundTransparency = 1
 
-local SoundOn = Instance.new("Sound", PlayerGui)
+local SoundOn = Instance.new("Sound", game.SoundService)
 	SoundOn.Name = "NightVisionOn"
 	SoundOn.SoundId = "rbxassetid://376178316"
-local SoundOff = Instance.new("Sound", PlayerGui)
+local SoundOff = Instance.new("Sound", game.SoundService)
 	SoundOn.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
@@ -116,7 +116,6 @@ Players.PlayerAdded:Connect(function(plr)
 	if plr.Name ~= Player.Name then
 		hl(Character)
 	end
-
 	plr.CharacterAdded:Connect(hl)
 end)
 
