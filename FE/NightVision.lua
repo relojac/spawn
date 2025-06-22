@@ -76,14 +76,16 @@ local function hl(Character)
 	local NV_hl = Instance.new("Highlight", Character)
 		NV_hl.Name = "NV_hl"
 		NV_hl.FillTransparency = 1
-		NV_hl.Enabled = nv
+		NV_hl.Enabled = false
 
 	if NV_hl then
-		while true do
-			task.wait()
-			NV_hl.Enabled = nv
-
-			if not NV_hl then break end
+		if Config.Highlights then
+			while true do
+				task.wait()
+				NV_hl.Enabled = nv
+				
+				if not NV_hl then break end
+			end
 		end
 	end
 end
@@ -111,8 +113,8 @@ end)
 RunService.Heartbeat:Connect(function()
 	if nv then
 		NVButton.Image = "rbxassetid://125086742998263"
-		VignetteGui.Enabled = true
-		NVE_1.Enabled = true
+		if Config.Vignette then VignetteGui.Enabled = true end
+		if Config.ColorCorrection then NVE_1.Enabled = true end
 	else
 		NVButton.Image = "rbxassetid://120316668670756"
 		VignetteGui.Enabled = false
