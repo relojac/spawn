@@ -23,7 +23,10 @@ Global.SpawnUtilsConfig = {
 		["Tween"] = false
 	},
 	["NightVision"] = {
-		["AmbientColor"] = Color3.fromRGB(153, 255, 208)
+		["AmbientColor"] = Color3.fromRGB(153, 255, 208),
+		["Vignette"] = true,
+		["Highlights"] = true,
+		["ColorCorrection"] = true
 	}
 }
 Global.Values = {
