@@ -83,6 +83,13 @@ local function nvtoggle()
 	end
 end
 
+local function createlight(ch)
+	local light = Instance.new("PointLight", ch)
+	light.Range = 30
+	light.Brightness = 4
+	light.Color = Ambient
+end
+
 local function hl(ch)
 	local Highlight = Instance.new("Highlight", ch)
 		Highlight.Name = "NV_hl"
