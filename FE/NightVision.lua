@@ -17,16 +17,15 @@ local PlayerGui = Player.PlayerGui
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
-local NVButton = Instance.new("ImageButton")
+local NVButton = Instance.new("ImageButton", JumpButtonFrame)
 	NVButton.Name = "NVButton"
 	NVButton.Position = UDim2.new(-3.3, 0, 0, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	NVButton.Size = UDim2.new(1, 0, 1, 0)
 	NVButton.BackgroundTransparency = 1
 	NVButton.Active = true
 	NVButton.Image = "rbxassetid://120316668670756"
-	NVButton.Parent = JumpButtonFrame
 
-local NV = Instance.new("TextLabel")
+local NV = Instance.new("TextLabel", NVButton)
 	NV.Name = "NVText" 
 	NV.Size = UDim2.new(1, 0, 1, 0)
 	NV.Text = "Night\nVision"
@@ -36,7 +35,7 @@ local NV = Instance.new("TextLabel")
 	NV.TextStrokeColor3 = Color3.new(0, 0, 0)
 	NV.TextStrokeTransparency = 0
 	NV.ZIndex = 1
-	NV.Parent = NVButton
+	NV.Active = false
 
 local NVE_1 = Instance.new("ColorCorrectionEffect", Lighting)
 	NVE_1.Name = "NVE_1"
@@ -114,7 +113,7 @@ Players.PlayerAdded:Connect(function(plr)
 end)
 
 RunService.Heartbeat:Connect(function()
-	if nv then
+	if nv == true then
 		NVButton.Image = "rbxassetid://125086742998263"
 		if Config.Vignette then VignetteGui.Enabled = true end
 		if Config.ColorCorrection then NVE_1.Enabled = true end
