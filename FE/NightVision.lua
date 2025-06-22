@@ -60,7 +60,7 @@ local SoundOn = Instance.new("Sound", SoundService)
 	SoundOn.Name = "NightVisionOn"
 	SoundOn.SoundId = "rbxassetid://376178316"
 local SoundOff = Instance.new("Sound", SoundService)
-	SoundOn.Name = "NightVisionOff"
+	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
 local nv = false
