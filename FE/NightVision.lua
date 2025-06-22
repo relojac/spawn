@@ -52,9 +52,10 @@ local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
-	Vignette.ImageTransparenxy = 0.5
+	Vignette.ImageTransparency = 0.5
 	Vignette.Image = "rbxassetid://113537235654608"
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
+	Vignette.BackgroundTransparency = 1
 
 local SoundOn = Instance.new("Sound", SoundService)
 	SoundOn.SoundId = "rbxassetid://376178316"
