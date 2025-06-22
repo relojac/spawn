@@ -47,14 +47,14 @@ local NVE = Instance.new("ColorCorrectionEffect", Lighting)
 local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 	VignetteGui.Name = "VignetteGuiLocal"
 	VignetteGui.IgnoreGuiInset = true
-	VignetteGui.Enabled = true
+	VignetteGui.Enabled = false
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
 	Vignette.ImageTransparency = 0.5
 	Vignette.Image = "rbxassetid://113537235654608"
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
-	Vignette.BackgroundTransparency = 0.5
+	Vignette.BackgroundTransparency = 1
 
 local SoundOn = Instance.new("Sound", PlayerGui)
 	SoundOn.Name = "NightVisionOn"
@@ -85,15 +85,15 @@ end
 
 local function hl(ch)
 	local Highlight = Instance.new("Highlight", ch)
-		NV_hl.Name = "NV_hl"
-		NV_hl.FillTransparency = 1
-		NV_hl.OutlineColor = Ambient
-		NV_hl.Enabled = false
+		Highlight.Name = "NV_hl"
+		Highlight.FillTransparency = 1
+		Highlight.OutlineColor = Ambient
+		Highlight.Enabled = false
 
 	if Highlight then
 		if Config.Highlights then
 			local loop = RunService.RenderStepped:Connect(function()
-				Highlihht.Enabled = nv
+				Highlight.Enabled = nv
 				
 				if not Highlight then loop:Disconnect() end
 			end)
