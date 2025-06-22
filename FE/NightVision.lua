@@ -1,12 +1,15 @@
 local execStart = tick() -- *starts timer* okay time to write code
 
+local Global = (getgenv and getgenv()) or shared
+local Config = Global.SpawnUtilsConfig.NightVision
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 
-local Ambient = Color3.fromRGB(153, 255, 208)
+local Ambient = Config.AmbientColor
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
