@@ -95,28 +95,30 @@ local function hl(ch)
 			local loop = RunService.RenderStepped:Connect(function()
 				Highlight.Enabled = nv
 				
-				if not Highlight then loop:Disconnect() end
+				if not Highlight.Parent then loop:Disconnect() end
 			end)
 		end
 	end
 end
 
-for _, plr in ipairs(Players:GetChildren()) do
-	local Character = plr.Character or plr.CharacterAdded:Wait()
+for _, plr in ipairs(Players:GetPlayers()) do
+	if plr ~= Player then
+		if plr.Character then
+			hl(plr.Character)
+		end
 
-	if plr.Name ~= Player.Name then
-		hl(Character)
+		plr.CharacterAdded:Connect(function(char)
+			hl(char)
+		end)
 	end
-	plr.CharacterAdded:Connect(hl)
 end
 
 Players.PlayerAdded:Connect(function(plr)
-	local Character = plr.Character or plr.CharacterAdded:Wait()
-
-	if plr.Name ~= Player.Name then
-		hl(Character)
+	if plr ~= Player then
+		plr.CharacterAdded:Connect(function(char)
+			hl(char)
+		end)
 	end
-	plr.CharacterAdded:Connect(hl)
 end)
 
 NVButton.MouseButton1Click:Connect(nvtoggle)
