@@ -82,12 +82,11 @@ local function hl(Character)
 
 	if NV_hl then
 		if Config.Highlights then
-			while true do
-				task.wait()
-				NV_hl.Enabled = nv
+			local loop = RunService.RenderStepped:Connect(function()
+				NV_hl.Enabled = nv_t
 				
-				if not NV_hl then break end
-			end
+				if not NV_hl then loop:Disconnect() end
+			end)
 		end
 	end
 end
