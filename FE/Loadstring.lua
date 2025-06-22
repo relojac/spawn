@@ -21,6 +21,9 @@ Global.SpawnUtilsConfig = {
 	},
 	["Suicide"] = {
 		["Tween"] = false
+	},
+	["NightVision"] = {
+		["AmbientColor"] = Color3.fromRGB(153, 255, 208)
 	}
 }
 Global.Values = {
