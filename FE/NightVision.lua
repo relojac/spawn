@@ -62,14 +62,15 @@ local SoundOn = Instance.new("Sound", SoundService)
 local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local nv = false
+local nv_t = false
 local function nvon()
-	if not nv then
-		nv = true
-		SoundOn:Play()
+	print("Toggled", nv_t)
+	if nv_t == false then
+		nv_t = true
+		SoundOn:Stop() SoundOn:Play()
 	else
-		nv = false
-		SoundOff:Play()
+		nv_t = false
+		SoundOff:Stop() SoundOff:Play()
 	end
 end
 
