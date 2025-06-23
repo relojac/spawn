@@ -23,19 +23,7 @@ local NVButton = Instance.new("ImageButton", JumpButtonFrame)
 	NVButton.Size = UDim2.new(1, 0, 1, 0)
 	NVButton.BackgroundTransparency = 1
 	NVButton.Active = true
-	NVButton.Image = "rbxassetid://120316668670756"
-
-local NVText = Instance.new("TextLabel", NVButton)
-	NVText.Name = "NVText" 
-	NVText.Size = UDim2.new(1, 0, 1, 0)
-	NVText.Text = "Night\nVision"
-	NVText.BackgroundTransparency = 1
-	NVText.TextSize = 11
-	NVText.TextColor3 = Color3.new(1, 1, 1)
-	NVText.TextStrokeColor3 = Color3.new(0, 0, 0)
-	NVText.TextStrokeTransparency = 0
-	NVText.ZIndex = 1
-	NVText.Active = false
+	NVButton.Image = "rbxassetid://132894389548973"
 
 local NVE = Instance.new("ColorCorrectionEffect", Lighting)
 	NVE.Name = "NVE_1"
@@ -70,14 +58,14 @@ local function nvtoggle()
 		nv = true
 		SoundOn:Play()
 
-		NVButton.Image = "rbxassetid://125086742998263"
+		NVButton.Image = "rbxassetid://123382459802673"
 		if Config.Vignette then VignetteGui.Enabled = true end
 		if Config.ColorCorrection then NVE.Enabled = true end
 	else
 		nv = false
 		SoundOff:Play()
 
-		NVButton.Image = "rbxassetid://120316668670756"
+		NVButton.Image = "rbxassetid://132894389548973"
 		VignetteGui.Enabled = false
 		NVE.Enabled = false
 	end
