@@ -54,10 +54,10 @@ local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local rootping = Instance.new("Sound")
-	rootping.Name = "Ping"
-	rootping.SoundId = "rbxassetid://6011559008"
-	rootping.Volume = 0.5
+local Ping = Instance.new("Sound", SoundService)
+	Ping.Name = "Ping"
+	Ping.SoundId = "rbxassetid://6011559008"
+	Ping.Volume = 0.5
 local Reverb = Instance.new("ReverbSoundEffect", rootping)
 	Reverb.Name = "Reverb"
 	Reverb.DecayTime = 15
@@ -119,11 +119,8 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 				Highlight.OutlineColor = Ambient
 				Highlight.Enabled = false
 
-			local Ping = rootping:Clone()
-				Ping.Parent = hrp
-
 			if Config.Highlights then
-				table.insert(NVHighlights, {Highlight = Highlight, Ping = Ping})
+				table.insert(NVHighlights, {Highlight = Highlight})
 
 				RunService.RenderStepped:Connect(function()
 					if Highlight then
@@ -146,15 +143,14 @@ task.spawn(function()
 		if nv then
 			for _, entry in ipairs(NVHighlights) do
 				local hl = entry.Highlight
-				local ping = entry.Ping
 
 				if hl and hl.Parent then
-					ping:Play()
 					hl.OutlineColor = Color3.fromRGB(255, 100, 100)
 					local tween = TweenService:Create(hl, info, {OutlineColor = Ambient})
 					tween:Play()
 				end
 			end
+			Ping:Play()
 		end
 		task.wait(5)
 	end
