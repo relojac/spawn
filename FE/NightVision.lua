@@ -11,6 +11,7 @@ local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
 
 local Ambient = Config.AmbientColor
 
@@ -138,6 +139,30 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 	end
 end
 
+local function voicesinyourhead(plr)
+	local hrp = plr.Character:WaitForChild("HumanoidRootPart")
+	local phantom = plr.Character:Clone()
+		phantom.Name = string.reverse(plr.Name)
+		phantom.Parent = workspace
+		phantom:SetPrimaryPartCFrame(hrp.CFrame)
+		phantom:TranslateBy(Vector3.new(5, 0, 5))
+
+	for _, obj in ipairs(phantom:GetDescendants()) do
+		if obj:IsA("BasePart") then
+			obj.Transparency = 0.75
+			obj.CanCollide = false
+			obj.Anchored = true
+		end
+	end
+
+	local ghostHl = Instance.new("Highlight", phantom)
+		ghostHl.Name = "Ghosthighlight"
+		ghostHl.FillTransparency = 1
+		ghostHl.OutlineColor = Color3.new(1, 0.4, 1)
+
+	Debris:AddItem(phantom, math.random(1, 3)
+end
+
 task.spawn(function()
 	while true do
 		if nv then
@@ -148,6 +173,10 @@ task.spawn(function()
 					hl.OutlineColor = Color3.fromRGB(255, 100, 100)
 					local tween = TweenService:Create(hl, info, {OutlineColor = Ambient})
 					tween:Play()
+
+					if math.random() < 0.15 then
+						voiceinyourhead(Player)
+					end
 				end
 			end
 			Ping:Play()
