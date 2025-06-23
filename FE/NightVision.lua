@@ -61,14 +61,21 @@ local rootping = Instance.new("Sound")
 local Reverb = Instance.new("ReverbSoundEffect", rootping)
 	Reverb.Name = "Reverb"
 	Reverb.DecayTime = 15
-	Reverb.DryLevel = 0.5
+	Reverb.DryLevel = 0
 	Reverb.WetLevel = 10
-local Static = Instance.new("Sound")
-	Static.Name = "Static"
-	Static.SoundId = "rbxassetid://4860560167"
-	Static.Volume = 0.25
 
 local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+
+local function safeWaitForChild(parent, childName, timeout)
+	local t = 0
+	timeout = timeout or 5 -- seconds max to wait
+	while t < timeout do
+		local child = parent:FindFirstChild(childName)
+		if child then return child end
+		t += task.wait()
+	end
+	return nil
+end
 
 local nv = false
 local function nvtoggle()
@@ -109,6 +116,9 @@ end
 
 local function hl(victim) -- Do not feel emotion for the cattle. They are not people, they are victims. They are food. They're all yours, Player.Name.
 	local function onCharacterAdded(char)
+		local hrp = safeWaitForChild(char, "HumanoidRootPart")
+		if not hrp then return end
+
 		local Highlight = Instance.new("Highlight", char)
 			Highlight.Name = "NV_hl"
 			Highlight.FillTransparency = 1
@@ -116,7 +126,7 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 			Highlight.Enabled = false
 
 		local Ping = rootping:Clone()
-			Ping.Parent = char:WaitForChild("HumanoidRootPart")
+			Ping.Parent = hrp
 
 		if Config.Highlights then
 			table.insert(NVHighlights, {Highlight = Highlight, Ping = Ping})
