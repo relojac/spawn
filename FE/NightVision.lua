@@ -105,13 +105,13 @@ end
 local function hl(plr)
 	local ch = plr.Character or plr.CharacterAdded:Wait()
 	local Highlight = Instance.new("Highlight", ch)
-	Highlight.Name = "NV_hl"
-	Highlight.FillTransparency = 1
-	Highlight.OutlineColor = Ambient
-	Highlight.Enabled = false
+		Highlight.Name = "NV_hl"
+		Highlight.FillTransparency = 1
+		Highlight.OutlineColor = Ambient
+		Highlight.Enabled = false
 
 	local Ping = rootping:Clone()
-	Ping.Parent = ch:FindFirstChild("HumanoidRootPart") or ch:FindFirstChild("Head")
+		Ping.Parent = ch:WaitForChild("HumanoidRootPart")
 
 	if Config.Highlights then
 		local running = true
