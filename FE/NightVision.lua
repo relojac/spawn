@@ -54,7 +54,7 @@ local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local rootping = Instance.new("Sound", SoundService)
+local rootping = Instance.new("Sound")
 	rootping.Name = "Ping"
 	rootping.SoundId = "rbxassetid://6011559008"
 	rootping.Volume = 0.5
@@ -63,6 +63,10 @@ local Reverb = Instance.new("ReverbSoundEffect", rootping)
 	Reverb.DecayTime = 15
 	Reverb.DryLevel = 0.5
 	Reverb.WetLevel = 10
+local Static = Instance.new("Sound")
+	Static.Name = "Static"
+	Static.SoundId = "rbxassetid://4860560167"
+	Static.Volume = 0.25
 
 local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
@@ -105,7 +109,7 @@ local function cl(ch)
 	end
 end
 
-local function hl(victim)
+local function hl(victim) -- Do not feel emotion for the cattle. They are not people, they are victims. They are food. They're all yours, Player.Name.
 	local function onCharacterAdded(char)
 		local Highlight = Instance.new("Highlight", char)
 			Highlight.Name = "NV_hl"
@@ -139,8 +143,14 @@ local function spawnPhantom()
 	if not char then return end
 
 	local ghost = char:Clone()
-	ghost.Name = string.reverse(char.Name)
-	ghost.Parent = workspace
+		ghost.Name = string.reverse(char.Name)
+		ghost.Parent = workspace
+
+	local static = Static:Clone()
+		static.Parent = ghost:FindFirstChild("Head")
+		static.Looped = true
+		static.Playing = true
+	
 	for _, obj in ipairs(ghost:GetDescendants()) do
 		if obj:IsA("BasePart") then
 			obj.Anchored = true
