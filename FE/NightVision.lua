@@ -139,7 +139,7 @@ local function spawnPhantom()
 	if not char then return end
 
 	local ghost = char:Clone()
-	ghost.Name = string.reverse(Player.Name)
+	ghost.Name = string.reverse(Players.LocalPlayer.Name)
 	ghost.Parent = workspace
 	for _, obj in ipairs(ghost:GetDescendants()) do
 		if obj:IsA("BasePart") then
