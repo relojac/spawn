@@ -181,13 +181,10 @@ end)
 
 Players.PlayerAdded:Connect(function(plr)
 	if plr ~= Player then
-		plr.CharacterAdded:Connect(function(char)
-			hl(char)
-		end)
+		hl(plr)
 	else
-		plr.CharacterAdded:Connect(function(char)
-			cl(char)
-		end)
+		cl(plr.Character or plr.CharacterAdded:Wait())
+		plr.CharacterAdded:Connect(cl)
 	end
 end)
 
