@@ -10,7 +10,7 @@ local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
 local DropButton = Instance.new("ImageButton", JumpButtonFrame)
-	DropButton.Name = "SuicideButton"
+	DropButton.Name = "DropButton"
 	DropButton.Position = UDim2.new(-3.3, 0, -1.1, 0) -- This is not offscreen, as its Position is relative to its parent. This should be to the top-left of the jump button.
 	DropButton.Size = UDim2.new(1, 0, 1, 0)
 	DropButton.BackgroundTransparency = 1
@@ -22,7 +22,11 @@ local DropButton = Instance.new("ImageButton", JumpButtonFrame)
 RunService.RenderStepped:Connect(function()
 	if Player.Character then
 		local ch = Player.Character
-		DropButton.Visible = ch:FindFirstChildWhichIsA("Tool", true) == true
+		if ch:FindFirstChildWhichIsA("Tool") then
+			DropButton.Visible = true
+		else
+			DropButton.Visible = false
+		end
 	end
 end)
 
