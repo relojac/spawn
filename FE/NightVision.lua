@@ -55,7 +55,7 @@ local SoundOff = Instance.new("Sound", SoundService)
 local rootping = Instance.new("Sound", SoundService)
 	rootping.Name = "Ping"
 	rootping.SoundId = "rbxassetid://18261237568"
-local Reverb = Instance.new("ReverbSoundEffect", Ping)
+local Reverb = Instance.new("ReverbSoundEffect", rootping)
 	Reverb.Name = "Reverb"
 	Reverb.DecayTime = 10
 	Reverb.DryLevel = 1
@@ -119,11 +119,12 @@ local function hl(pl)
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
 
-			while Highlight.Enabled and Highlight.Parent do
+			while nv do
 				local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
 				task.wait(5)
 
 				Ping:Play()
+				
 				Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
 				task.wait()
 				tween:Play()
