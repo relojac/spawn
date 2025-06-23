@@ -105,7 +105,7 @@ local function cl(ch)
 	end
 end
 
-local function hl(plr)
+local function hl(victim)
 	local function onCharacterAdded(char)
 		local Highlight = Instance.new("Highlight", char)
 			Highlight.Name = "NV_hl"
@@ -127,10 +127,10 @@ local function hl(plr)
 		end
 	end
 
-	plr.CharacterAdded:Connect(onCharacterAdded)
+	victim.CharacterAdded:Connect(onCharacterAdded)
 	
-	if plr.Character then
-		onCharacterAdded(plr.Character)
+	if victim.Character then
+		onCharacterAdded(victim.Character)
 	end
 end
 
