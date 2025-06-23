@@ -1,5 +1,7 @@
 local execStart = tick() -- *starts timer* okay time to write code
 
+local NVHighlights = {}
+
 local Global = (getgenv and getgenv()) or shared
 local Config = Global.SpawnUtilsConfig.NightVision
 
@@ -105,30 +107,16 @@ end
 local function hl(plr)
 	local function onCharacterAdded(char)
 		local Highlight = Instance.new("Highlight", char)
-		Highlight.Name = "NV_hl"
-		Highlight.FillTransparency = 1
-		Highlight.OutlineColor = Ambient
-		Highlight.Enabled = false
+			Highlight.Name = "NV_hl"
+			Highlight.FillTransparency = 1
+			Highlight.OutlineColor = Ambient
+			Highlight.Enabled = false
 
 		local Ping = rootping:Clone()
-		Ping.Parent = char:WaitForChild("HumanoidRootPart")
+			Ping.Parent = char:WaitForChild("HumanoidRootPart")
 
 		if Config.Highlights then
-			local running = true
-			local function pulse()
-				while running and Highlight and Highlight.Parent do
-					if nv then
-						Ping:Play()
-						Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
-						local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
-						tween:Play()
-						task.wait(5)
-					else
-						task.wait(0.5)
-					end
-				end
-			end
-			task.spawn(pulse)
+			table.insert(NVHighlights, {Highlight = Highlight, Ping = Ping})
 
 			RunService.RenderStepped:Connect(function()
 				if Highlight then
@@ -138,13 +126,31 @@ local function hl(plr)
 		end
 	end
 
-	-- Connect to character spawn
 	plr.CharacterAdded:Connect(onCharacterAdded)
-	-- If character exists already, run it
+	
 	if plr.Character then
 		onCharacterAdded(plr.Character)
 	end
 end
+
+task.spawn(function()
+	while true do
+		if nv then
+			for _, entry in ipairs(NVHighlights) do
+				local hl = entry.Highlight
+				local ping = entry.Ping
+
+				if hl and hl.Parent then
+					ping:Play()
+					hl.OutlineColor = Color3.fromRGB(255, 100, 100)
+					local tween = TweenService:Create(hl, info, {OutlineColor = Ambient})
+					tween:Play()
+				end
+			end
+		end
+		task.wait(5)
+	end
+end)
 
 for _, plr in ipairs(Players:GetPlayers()) do
 	if plr ~= Player then
