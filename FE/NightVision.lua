@@ -160,7 +160,7 @@ local function voicesinyourhead(plr)
 		ghostHl.FillTransparency = 1
 		ghostHl.OutlineColor = Color3.new(1, 0.4, 1)
 
-	Debris:AddItem(phantom, math.random(1, 3)
+	Debris:AddItem(phantom, math.random(1, 3))
 end
 
 task.spawn(function()
