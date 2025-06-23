@@ -58,8 +58,8 @@ local Ping = Instance.new("Sound", SoundService)
 local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.Name = "Reverb"
 	Reverb.DecayTime = 10
-	Reverb.DryLevel = -4
-	Reverb.WetLevel = 3
+	Reverb.DryLevel = 0
+	Reverb.WetLevel = 7
 
 local info = TweenInfo.new(2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
@@ -84,7 +84,7 @@ local function nvtoggle()
 end
 
 local function cl(ch)
-	local light = Instance.new("PointLight", ch:FindFirstChild("HumanoidRootPart"))
+	local light = Instance.new("PointLight", ch:WaitForChild("HumanoidRootPart"))
 		light.Range = 60
 		light.Brightness = 1.5
 		light.Color = Ambient
@@ -114,13 +114,6 @@ local function hl(ch)
 				
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
-
-			while Highlight and Highlight.Parent and Highlight.Enabled do
-				task.wait(5)
-
-				Ping:Play()
-				TweenService:Create(Highlight, info, { OutlineColor = Color3.new(1, 0, 0) }):Play()
-			end
 		end
 	end
 end
