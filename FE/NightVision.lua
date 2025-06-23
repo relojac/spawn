@@ -139,13 +139,13 @@ local function spawnPhantom()
 	if not char then return end
 
 	local ghost = char:Clone()
-	ghost.Name = string.reverse(Players.LocalPlayer.Name)
+	ghost.Name = string.reverse(char.Name)
 	ghost.Parent = workspace
 	for _, obj in ipairs(ghost:GetDescendants()) do
 		if obj:IsA("BasePart") then
 			obj.Anchored = true
 			obj.CanCollide = false
-			obj.Transparency = 0.8
+			obj.Transparency = 0.75
 		end
 	end
 
@@ -157,7 +157,7 @@ local function spawnPhantom()
 
 	ghost:PivotTo(char:GetPivot() * CFrame.new(0, 0, -6))
 
-	game.Debris:AddItem(ghost, math.random(0.5, 3))
+	game.Debris:AddItem(ghost, math.random(0.5, 2.5))
 end
 
 task.spawn(function()
@@ -176,7 +176,7 @@ task.spawn(function()
 			end
 
 			task.spawn(function()
-				if math.random() < 0.02 then
+				if math.random() < 0.2 then
 					spawnPhantom()
 				end
 			end)
