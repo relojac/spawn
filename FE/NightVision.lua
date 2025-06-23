@@ -63,6 +63,8 @@ local Reverb = Instance.new("ReverbSoundEffect", rootping)
 
 local info = TweenInfo.new(2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
+task.wait()
+
 local nv = false
 local function nvtoggle()
 	print("Toggled", nv)
@@ -100,8 +102,8 @@ local function cl(ch)
 	end
 end
 
-local function hl(pl)
-	local ch = pl.Character or pl.CharacterAdded:Wait()
+local function hl(plr)
+	local ch = plr.Character or plr.CharacterAdded:Wait()
 	local Highlight = Instance.new("Highlight", ch)
 		Highlight.Name = "NV_hl"
 		Highlight.FillTransparency = 1
@@ -119,15 +121,16 @@ local function hl(pl)
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
 
-			while nv do
+			while Highlight.Enabled == true do
 				local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
-				task.wait(5)
 
 				Ping:Play()
 				
 				Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
 				task.wait()
 				tween:Play()
+
+				task.wait(5)
 			end
 		end
 	end
@@ -135,9 +138,7 @@ end
 
 for _, plr in ipairs(Players:GetPlayers()) do
 	if plr ~= Player then
-		if plr.Character then
-			hl(plr)
-		end
+		hl(plr)
 	end
 end
 
@@ -160,6 +161,8 @@ Players.PlayerAdded:Connect(function(plr)
 		end)
 	end
 end)
+
+task.wait()
 
 NVButton.MouseButton1Click:Connect(nvtoggle)
 
