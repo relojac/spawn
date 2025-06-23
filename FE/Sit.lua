@@ -32,9 +32,9 @@ end
 
 RunService.Heartbeat:Connect(function()
 	if Humanoid.Sit then
-		SitButton.Image = "rbxassetid://92918494397842"
+		SitButton.Image = "rbxassetid://77692003908852"
 	else
-		SitButton.Image = "rbxassetid://79989066743509"
+		SitButton.Image = "rbxassetid://115530019032792"
 	end
 end)
 
