@@ -52,14 +52,14 @@ local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local Ping = Instance.new("Sound", SoundService)
-	Ping.Name = "Ping"
-	Ping.SoundId = "rbxassetid://18261237568"
+local rootping = Instance.new("Sound", SoundService)
+	rootping.Name = "Ping"
+	rootping.SoundId = "rbxassetid://18261237568"
 local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.Name = "Reverb"
 	Reverb.DecayTime = 10
-	Reverb.DryLevel = 0
-	Reverb.WetLevel = 7
+	Reverb.DryLevel = 1
+	Reverb.WetLevel = 8
 
 local info = TweenInfo.new(2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
@@ -107,6 +107,9 @@ local function hl(ch)
 		Highlight.OutlineColor = Ambient
 		Highlight.Enabled = false
 
+	local Ping = rootping:Clone()
+		Ping.Parent = ch:WaitForChild("HumanoidRootPart")
+
 	if Highlight then
 		if Config.Highlights then
 			local loop = RunService.RenderStepped:Connect(function()
@@ -114,6 +117,16 @@ local function hl(ch)
 				
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
+
+			while Highlight.Enabled and Highlight.Parent do
+				local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
+				task.wait(5)
+
+				Ping:Play()
+				Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
+				task.wait()
+				tween:Play()
+			end
 		end
 	end
 end
