@@ -105,34 +105,37 @@ end
 local function hl(plr)
 	local ch = plr.Character or plr.CharacterAdded:Wait()
 	local Highlight = Instance.new("Highlight", ch)
-		Highlight.Name = "NV_hl"
-		Highlight.FillTransparency = 1
-		Highlight.OutlineColor = Ambient
-		Highlight.Enabled = false
+	Highlight.Name = "NV_hl"
+	Highlight.FillTransparency = 1
+	Highlight.OutlineColor = Ambient
+	Highlight.Enabled = false
 
 	local Ping = rootping:Clone()
-		Ping.Parent = ch:FindFirstChild("HumanoidRootPart") or ch:FindFirstChild("Head")
+	Ping.Parent = ch:FindFirstChild("HumanoidRootPart") or ch:FindFirstChild("Head")
 
-	if Highlight then
-		if Config.Highlights then
-			local loop = RunService.RenderStepped:Connect(function()
-				Highlight.Enabled = nv
-				
-				if not Highlight.Parent then loop:Disconnect() end
-			end)
-
-			while Highlight.Enabled == true and ch do
-				local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
-
-				Ping:Play()
-				
-				Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
-				task.wait()
-				tween:Play()
-
-				task.wait(5)
+	if Config.Highlights then
+		local running = true
+		local function pulse()
+			while running and Highlight and Highlight.Parent do
+				if nv then
+					Ping:Play()
+					Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
+					local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
+					tween:Play()
+					task.wait(5)
+				else
+					task.wait(0.5)
+				end
 			end
 		end
+
+		task.spawn(pulse)
+
+		RunService.RenderStepped:Connect(function()
+			if Highlight then
+				Highlight.Enabled = nv
+			end
+		end)
 	end
 end
 
