@@ -8,6 +8,7 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
+local TweenService = game:GetService("TweenService")
 
 local Ambient = Config.AmbientColor
 
@@ -50,6 +51,17 @@ local SoundOn = Instance.new("Sound", SoundService)
 local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
+
+local Ping = Instance.new("Sound", SoundService)
+	Ping.Name = "Ping"
+	Ping.SoundId = "rbxassetid://18261237568"
+local Reverb = Instance.new("ReverbSoundEffect", Ping)
+	Reverb.Name = "Reverb"
+	Reverb.DecayTime = 10
+	Reverb.DryLevel = -4
+	Reverb.WetLevel = 3
+
+local info = TweenInfo.new(2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
 local nv = false
 local function nvtoggle()
@@ -102,6 +114,13 @@ local function hl(ch)
 				
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
+
+			while Highlight and Highlight.Parent and Highlight.Enabled do
+				task.wait(5)
+
+				Ping:Play()
+				TweenService:Create(Highlight, info, { OutlineColor = Color3.new(1, 0, 0) }):Play()
+			end
 		end
 	end
 end
