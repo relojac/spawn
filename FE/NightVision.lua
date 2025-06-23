@@ -100,7 +100,8 @@ local function cl(ch)
 	end
 end
 
-local function hl(ch)
+local function hl(pl)
+	local ch = pl.Character or pl.CharacterAdded:Wait()
 	local Highlight = Instance.new("Highlight", ch)
 		Highlight.Name = "NV_hl"
 		Highlight.FillTransparency = 1
@@ -108,7 +109,7 @@ local function hl(ch)
 		Highlight.Enabled = false
 
 	local Ping = rootping:Clone()
-		Ping.Parent = ch:WaitForChild("HumanoidRootPart")
+		Ping.Parent = ch:FindFirstChild("HumanoidRootPart") or ch:FindFirstChild("Head")
 
 	if Highlight then
 		if Config.Highlights then
@@ -134,12 +135,8 @@ end
 for _, plr in ipairs(Players:GetPlayers()) do
 	if plr ~= Player then
 		if plr.Character then
-			hl(plr.Character)
+			hl(plr)
 		end
-
-		plr.CharacterAdded:Connect(function(char)
-			hl(char)
-		end)
 	end
 end
 
