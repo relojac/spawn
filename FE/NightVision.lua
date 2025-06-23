@@ -103,39 +103,46 @@ local function cl(ch)
 end
 
 local function hl(plr)
-	local ch = plr.Character or plr.CharacterAdded:Wait()
-	local Highlight = Instance.new("Highlight", ch)
+	local function onCharacterAdded(char)
+		local Highlight = Instance.new("Highlight", char)
 		Highlight.Name = "NV_hl"
 		Highlight.FillTransparency = 1
 		Highlight.OutlineColor = Ambient
 		Highlight.Enabled = false
 
-	local Ping = rootping:Clone()
-		Ping.Parent = ch:WaitForChild("HumanoidRootPart")
+		local Ping = rootping:Clone()
+		Ping.Parent = char:WaitForChild("HumanoidRootPart")
 
-	if Config.Highlights then
-		local running = true
-		local function pulse()
-			while running and Highlight and Highlight.Parent do
-				if nv then
-					Ping:Play()
-					Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
-					local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
-					tween:Play()
-					task.wait(5)
-				else
-					task.wait(0.5)
+		if Config.Highlights then
+			local running = true
+			local function pulse()
+				while running and Highlight and Highlight.Parent do
+					if nv then
+						Ping:Play()
+						Highlight.OutlineColor = Color3.fromRGB(255, 100, 100)
+						local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
+						tween:Play()
+						task.wait(5)
+					else
+						task.wait(0.5)
+					end
 				end
 			end
+			task.spawn(pulse)
+
+			RunService.RenderStepped:Connect(function()
+				if Highlight then
+					Highlight.Enabled = nv
+				end
+			end)
 		end
+	end
 
-		task.spawn(pulse)
-
-		RunService.RenderStepped:Connect(function()
-			if Highlight then
-				Highlight.Enabled = nv
-			end
-		end)
+	-- Connect to character spawn
+	plr.CharacterAdded:Connect(onCharacterAdded)
+	-- If character exists already, run it
+	if plr.Character then
+		onCharacterAdded(plr.Character)
 	end
 end
 
@@ -167,6 +174,7 @@ end)
 
 task.wait()
 
+print("connect button click")
 NVButton.MouseButton1Click:Connect(nvtoggle)
 
 UserInputService.InputBegan:Connect(function(input)
