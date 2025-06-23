@@ -121,7 +121,7 @@ local function hl(plr)
 				if not Highlight.Parent then loop:Disconnect() end
 			end)
 
-			while Highlight.Enabled == true do
+			while Highlight.Enabled == true and ch do
 				local tween = TweenService:Create(Highlight, info, { OutlineColor = Ambient })
 
 				Ping:Play()
