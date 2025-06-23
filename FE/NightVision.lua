@@ -66,17 +66,6 @@ local Reverb = Instance.new("ReverbSoundEffect", rootping)
 
 local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
-local function safeWaitForChild(parent, childName, timeout)
-	local t = 0
-	timeout = timeout or 5 -- seconds max to wait
-	while t < timeout do
-		local child = parent:FindFirstChild(childName)
-		if child then return child end
-		t += task.wait()
-	end
-	return nil
-end
-
 local nv = false
 local function nvtoggle()
 	print("Toggled", nv)
@@ -116,27 +105,33 @@ end
 
 local function hl(victim) -- Do not feel emotion for the cattle. They are not people, they are victims. They are food. They're all yours, Player.Name.
 	local function onCharacterAdded(char)
-		local hrp = safeWaitForChild(char, "HumanoidRootPart")
-		if not hrp then return end
+	-- Non-blocking wait loop for HRP
+		task.spawn(function()
+			local hrp = char:FindFirstChild("HumanoidRootPart")
+			while not hrp do
+				char.ChildAdded:Wait()
+				hrp = char:FindFirstChild("HumanoidRootPart")
+			end
+	
+			local Highlight = Instance.new("Highlight", char)
+				Highlight.Name = "NV_hl"
+				Highlight.FillTransparency = 1
+				Highlight.OutlineColor = Ambient
+				Highlight.Enabled = false
 
-		local Highlight = Instance.new("Highlight", char)
-			Highlight.Name = "NV_hl"
-			Highlight.FillTransparency = 1
-			Highlight.OutlineColor = Ambient
-			Highlight.Enabled = false
+			local Ping = rootping:Clone()
+				Ping.Parent = hrp
 
-		local Ping = rootping:Clone()
-			Ping.Parent = hrp
+			if Config.Highlights then
+				table.insert(NVHighlights, {Highlight = Highlight, Ping = Ping})
 
-		if Config.Highlights then
-			table.insert(NVHighlights, {Highlight = Highlight, Ping = Ping})
-
-			RunService.RenderStepped:Connect(function()
-				if Highlight then
-					Highlight.Enabled = nv
-				end
-			end)
-		end
+				RunService.RenderStepped:Connect(function()
+					if Highlight then
+						Highlight.Enabled = nv
+					end
+				end)
+			end
+		end)
 	end
 
 	victim.CharacterAdded:Connect(onCharacterAdded)
