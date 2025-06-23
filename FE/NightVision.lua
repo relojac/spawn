@@ -56,14 +56,15 @@ local SoundOff = Instance.new("Sound", SoundService)
 
 local rootping = Instance.new("Sound", SoundService)
 	rootping.Name = "Ping"
-	rootping.SoundId = "rbxassetid://18261237568"
+	rootping.SoundId = "rbxassetid://6011559008"
+	rootping.Volume = 0.5
 local Reverb = Instance.new("ReverbSoundEffect", rootping)
 	Reverb.Name = "Reverb"
-	Reverb.DecayTime = 10
-	Reverb.DryLevel = 1
-	Reverb.WetLevel = 8
+	Reverb.DecayTime = 15
+	Reverb.DryLevel = 0.5
+	Reverb.WetLevel = 10
 
-local info = TweenInfo.new(2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
 task.wait()
 
