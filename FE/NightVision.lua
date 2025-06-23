@@ -83,11 +83,20 @@ local function nvtoggle()
 	end
 end
 
-local function createlight(ch)
+local function cl(ch)
 	local light = Instance.new("PointLight", ch)
-	light.Range = 30
-	light.Brightness = 4
-	light.Color = Ambient
+		light.Range = 30
+		light.Brightness = 4
+		light.Color = Ambient
+		light.Enabled = false
+
+	if light then
+		local loop = RunService.RenderStepped:Connect(function()
+			light.Enabled = nv
+
+			if not light.Parent then loop:Disconnect() end
+		end)
+	end
 end
 
 local function hl(ch)
@@ -96,6 +105,11 @@ local function hl(ch)
 		Highlight.FillTransparency = 1
 		Highlight.OutlineColor = Ambient
 		Highlight.Enabled = false
+	
+	local pl = Players:GetPlayerFromCharacter(ch)
+	if pl:IsFriendsWith(Player.UserId) then
+		Highlight.OutlineColor = Color3.fromRGB(153, 209, 255)
+	end
 
 	if Highlight then
 		if Config.Highlights then
@@ -117,6 +131,14 @@ for _, plr in ipairs(Players:GetPlayers()) do
 		plr.CharacterAdded:Connect(function(char)
 			hl(char)
 		end)
+	else
+		if plr.Character then
+			cl(plr.Character)
+		end
+
+		plr.CharacterAdded:Connect(function(char)
+			cl(char)
+		end)
 	end
 end
 
@@ -124,6 +146,10 @@ Players.PlayerAdded:Connect(function(plr)
 	if plr ~= Player then
 		plr.CharacterAdded:Connect(function(char)
 			hl(char)
+		end)
+	else
+		plr.CharacterAdded:Connect(function(char)
+			cl(char)
 		end)
 	end
 end)
