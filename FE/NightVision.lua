@@ -134,6 +134,32 @@ local function hl(plr)
 	end
 end
 
+local function spawnPhantom()
+	local char = Player.Character
+	if not char then return end
+
+	local ghost = char:Clone()
+	ghost.Name = string.reverse(Player.Name)
+	ghost.Parent = workspace
+	for _, obj in ipairs(ghost:GetDescendants()) do
+		if obj:IsA("BasePart") then
+			obj.Anchored = true
+			obj.CanCollide = false
+			obj.Transparency = 0.8
+		end
+	end
+
+	local hl = Instance.new("Highlight", ghost)
+		hl.Name = "GhostHighlight"
+		hl.OutlineColor = Color3.fromRGB(255, 100, 255)
+		hl.FillTransparency = 1
+		hl.Enabled = true
+
+	ghost:PivotTo(char:GetPivot() * CFrame.new(0, 0, -6))
+
+	game.Debris:AddItem(ghost, math.random(0.5, 3))
+end
+
 task.spawn(function()
 	while true do
 		if nv then
@@ -148,6 +174,12 @@ task.spawn(function()
 					tween:Play()
 				end
 			end
+
+			task.spawn(function()
+				if math.random() < 0.02 then
+					spawnPhantom()
+				end
+			end)
 		end
 		task.wait(5)
 	end
