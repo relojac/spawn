@@ -76,7 +76,7 @@ local function cl(ch)
 		light.Range = 60
 		light.Brightness = 1.5
 		light.Color = Ambient
-		light Shadows = true
+		light.Shadows = true
 		light.Enabled = false
 
 	if light then
