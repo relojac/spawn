@@ -70,8 +70,6 @@ local Static = Instance.new("Sound")
 
 local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
-task.wait()
-
 local nv = false
 local function nvtoggle()
 	print("Toggled", nv)
@@ -95,7 +93,7 @@ end
 local function cl(ch)
 	local light = Instance.new("PointLight", ch:WaitForChild("HumanoidRootPart"))
 		light.Range = 60
-		light.Brightness = 1.5
+		light.Brightness = 2
 		light.Color = Ambient
 		light.Shadows = true
 		light.Enabled = false
@@ -138,38 +136,6 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 	end
 end
 
-local function spawnPhantom()
-	local char = Player.Character
-	if not char then return end
-
-	local ghost = char:Clone()
-		ghost.Name = string.reverse(char.Name)
-		ghost.Parent = workspace
-
-	local static = Static:Clone()
-		static.Parent = ghost:FindFirstChild("Head")
-		static.Looped = true
-		static.Playing = true
-	
-	for _, obj in ipairs(ghost:GetDescendants()) do
-		if obj:IsA("BasePart") then
-			obj.Anchored = true
-			obj.CanCollide = false
-			obj.Transparency = 0.75
-		end
-	end
-
-	local hl = Instance.new("Highlight", ghost)
-		hl.Name = "GhostHighlight"
-		hl.OutlineColor = Color3.fromRGB(255, 100, 255)
-		hl.FillTransparency = 1
-		hl.Enabled = true
-
-	ghost:PivotTo(char:GetPivot() * CFrame.new(0, 0, -6))
-
-	game.Debris:AddItem(ghost, math.random(0.5, 2.5))
-end
-
 task.spawn(function()
 	while true do
 		if nv then
@@ -184,12 +150,6 @@ task.spawn(function()
 					tween:Play()
 				end
 			end
-
-			task.spawn(function()
-				if math.random() < 0.2 then
-					spawnPhantom()
-				end
-			end)
 		end
 		task.wait(5)
 	end
