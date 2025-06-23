@@ -142,7 +142,7 @@ end
 local function voicesinyourhead(plr)
 	local hrp = plr.Character:WaitForChild("HumanoidRootPart")
 	local phantom = plr.Character:Clone()
-		phantom.Name = string.reverse(plr.Name)
+		phantom.Name = "You."
 		phantom.Parent = workspace
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
