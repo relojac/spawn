@@ -175,7 +175,7 @@ task.spawn(function()
 					tween:Play()
 
 					if math.random() < 0.15 then
-						voiceinyourhead(Players.LocalPlayer)
+						voicesinyourhead(Players.LocalPlayer)
 					end
 				end
 			end
