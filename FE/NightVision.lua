@@ -105,11 +105,6 @@ local function hl(ch)
 		Highlight.FillTransparency = 1
 		Highlight.OutlineColor = Ambient
 		Highlight.Enabled = false
-	
-	local pl = Players:GetPlayerFromCharacter(ch)
-	if pl:IsFriendsWith(Player.UserId) then
-		Highlight.OutlineColor = Color3.fromRGB(153, 209, 255)
-	end
 
 	if Highlight then
 		if Config.Highlights then
