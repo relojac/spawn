@@ -72,10 +72,11 @@ local function nvtoggle()
 end
 
 local function cl(ch)
-	local light = Instance.new("PointLight", ch)
-		light.Range = 30
-		light.Brightness = 4
+	local light = Instance.new("PointLight", ch:FindFirstChild("HumanoidRootPart"))
+		light.Range = 60
+		light.Brightness = 1.5
 		light.Color = Ambient
+		light Shadows = true
 		light.Enabled = false
 
 	if light then
@@ -114,16 +115,16 @@ for _, plr in ipairs(Players:GetPlayers()) do
 		plr.CharacterAdded:Connect(function(char)
 			hl(char)
 		end)
-	else
-		if plr.Character then
-			cl(plr.Character)
-		end
-
-		plr.CharacterAdded:Connect(function(char)
-			cl(char)
-		end)
 	end
 end
+
+if Player.Character then
+	cl(Player.Character)
+end
+
+Player.CharacterAdded:Connect(function(char)
+	cl(char)
+end)
 
 Players.PlayerAdded:Connect(function(plr)
 	if plr ~= Player then
