@@ -33,7 +33,7 @@ local msgs = {
 	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(DisplayName)),
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(DisplayName),
 	"WHY DID YOU KILL HER?",
 	"YOU FUCKING IMBECILE",
 	"JUMP",
