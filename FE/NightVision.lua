@@ -140,9 +140,10 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 end
 
 local function voicesinyourhead(plr)
-	local hrp = plr.Character:WaitForChild("HumanoidRootPart")
-	local phantom = plr.Character:Clone()
-		phantom.Name = "You."
+	local char = plr.Character or plr.Character:Wait()
+	local hrp = char:WaitForChild("HumanoidRootPart")
+	local phantom = char:Clone()
+		phantom.Name = string.reverse(plr.DisplayName)
 		phantom.Parent = workspace
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
@@ -157,8 +158,9 @@ local function voicesinyourhead(plr)
 
 	local ghostHl = Instance.new("Highlight", phantom)
 		ghostHl.Name = "Ghosthighlight"
-		ghostHl.FillTransparency = 1
+		ghostHl.FillTransparency = 0
 		ghostHl.OutlineColor = Color3.new(1, 0.4, 1)
+		ghostHl.FillColor = Color3.new(0, 0, 0)
 
 	Debris:AddItem(phantom, math.random(1, 3))
 end
