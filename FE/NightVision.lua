@@ -16,11 +16,11 @@ local TextChatService = game:GetService("TextChatService")
 
 local Ambient = Config.AmbientColor
 local PingCol = Config.PingColor
-local Schizophrenia = Config.Psychopathic
+local Schizophrenic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local --[[friends]] deadBodies = Players:GetFriendsAsync(Player.UserId)
+local deadBodies = Players:GetFriendsAsync(Player.UserId)
 
 local ids = table.create(1000)
 local count = 1
@@ -250,7 +250,7 @@ task.spawn(function()
 					tween1:Play()
 					tween2:Play()
 
-					if math.random() < 0.15 and Schizophrenia then
+					if math.random() < 0.2 and Schizophrenic then
 						voicesinyourhead(Player)
 					end
 				end
