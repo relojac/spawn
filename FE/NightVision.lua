@@ -19,23 +19,32 @@ local Psychopathic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local deadBodies = Players:GetFriendsAsync(Player.UserId)
 
 local ids = table.create(1000)
 local count = 1
 
-while true do
-	for _, item in ipairs(deadBodies:GetCurrentPage()) do
-		ids[count] = item.Id
-		count += 1
-	end
+task.spawn(function()
+	local success, deadBodies = pcall(function()
+		return Players:GetFriendsAsync(Player.UserId)
+	end)
 
-	if deadBodies.IsFinished then
-		break
-	end
+	if success and deadBodies then
+		while true do
+			for _, item in ipairs(deadBodies:GetCurrentPage()) do
+				ids[count] = item.Id
+				count += 1
+			end
 
-	deadBodies:AdvanceToNextPageAsync()
-end
+			if deadBodies.IsFinished then
+				break
+			end
+
+			deadBodies:AdvanceToNextPageAsync()
+		end
+	else
+		warn("failed to get friends:", deadBodies)
+	end
+end)
 
 local messages = {
 	"IT'S ALL YOUR FAULT",
