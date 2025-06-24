@@ -139,7 +139,7 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 	end
 end
 
-local function voicesinyourhead(plr)
+--[[local function voicesinyourhead(plr)
 	local char = plr.Character or plr.Character:Wait()
 	local hrp = char:WaitForChild("HumanoidRootPart")
 
@@ -165,7 +165,7 @@ local function voicesinyourhead(plr)
 		ghostHl.FillColor = Color3.new(0, 0, 0)
 
 	Debris:AddItem(phantom, math.random(1, 3))
-end
+end]]
 
 task.spawn(function()
 	while true do
@@ -178,9 +178,9 @@ task.spawn(function()
 					local tween = TweenService:Create(hl, info, {OutlineColor = Ambient})
 					tween:Play()
 
-					if math.random() < 0.15 then
+					--[[if math.random() < 0.15 then
 						voicesinyourhead(Players.LocalPlayer)
-					end
+					end]]
 				end
 			end
 			Ping:Play()
