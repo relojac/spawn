@@ -20,6 +20,7 @@ local Psychopathic = Config.Psychopathic
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local UserId = Player.UserId
+local DisplayName = Player.Character.Humanoid.DisplayName or Player.DisplayName or Player.Name
 
 local msgs = {
 	"IT'S ALL YOUR FAULT",
@@ -32,7 +33,7 @@ local msgs = {
 	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player:FindFirstChildOfClass("Humanoid").DisplayName),
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(DisplayName)),
 	"WHY DID YOU KILL HER?",
 	"YOU FUCKING IMBECILE",
 	"JUMP",
