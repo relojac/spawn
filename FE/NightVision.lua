@@ -30,14 +30,14 @@ local msgs = {
 	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName),
+	"YOU'RE NOT GETTING AWAY THIS Time",
 	"WHY DID YOU KILL HER?",
 	"YOU FUCKING IMBECILE",
 	"JUMP",
 	"END IT"
 }
 
-local MobileButtons = PlayerGui:FindFirstChild("MobileButtonsLocal")
+local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons.JumpButtonFrame
 
 local NVButton = Instance.new("ImageButton", JumpButtonFrame)
@@ -58,8 +58,8 @@ local NVE = Instance.new("ColorCorrectionEffect", Lighting)
 
 local VignetteGui = Instance.new("ScreenGui", PlayerGui)
 	VignetteGui.Name = "VignetteGuiLocal"
-	VignetteGui.IgnoreGuiInset = true
 	VignetteGui.Enabled = false
+	VignetteGui.IgnoreGuiInset = true
 
 local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Name = "Vignette"
@@ -71,7 +71,7 @@ local Subtitle = Instance.new("TextLabel", VignetteGui)
 	Subtitle.Name = "Subtitle"
 	Subtitle.Text = msgs[1]
 	Subtitle.BackgroundTransparency = 1
-	Subtitle.Font = Enum.Font.Highway
+	Subtitle.Font = Enum.Font.Code
 	Subtitle.TextColor3 = AmbientColor
 	Subtitle.Visible = false
 	Subtitle.AnchorPoint = Vector2.new(0.5, 1)
@@ -96,8 +96,7 @@ local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.DryLevel = 0
 	Reverb.WetLevel = 10
 
-local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
-local info2 = TweenInfo.new(2)
+local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)0-
 
 local nv = false
 local function nvtoggle()
@@ -170,7 +169,7 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 end
 
 local function voicesinyourhead(plr)
-	local char = plr.Character or plr.Character:Wait()
+	local char = plr.Character
 	local hrp = char:WaitForChild("HumanoidRootPart")
 
 	if not char then return end
