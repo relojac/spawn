@@ -2,7 +2,7 @@ local execStart = tick() -- *starts timer* okay time to write code
 
 local NVHighlights = {}
 
-local Global = (getgenv and getgenv()) or shared
+local Global = (getgenv and getgenv()) or sharedz
 local Config = Global.SpawnUtilsConfig.NightVision
 
 local Players = game:GetService("Players")
@@ -13,15 +13,15 @@ local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
 
-local Ambient = Config.AmbientColor
-local PingCol = Config.PingColor
+local AmbientColor = Config.AmbientColor
+local PingColor = Config.PingColor
 local Psychopathic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local UserId = Player.UserId
 
-local messages = {
+local msgs = {
 	"IT'S ALL YOUR FAULT",
 	"YOU NEED TO KEEP THE GOGGLES ON",
 	"TAKE THE GOGGLES OFF",
@@ -32,7 +32,7 @@ local messages = {
 	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName),
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player:FindFirstChildOfClass("Humanoid").DisplayName),
 	"WHY DID YOU KILL HER?",
 	"YOU FUCKING IMBECILE",
 	"JUMP",
@@ -53,7 +53,7 @@ local NVButton = Instance.new("ImageButton", JumpButtonFrame)
 local NVE = Instance.new("ColorCorrectionEffect", Lighting)
 	NVE.Name = "NVE_1"
 	NVE.Enabled = false
-	NVE.TintColor = Ambient
+	NVE.TintColor = AmbientColor
 	NVE.Contrast = 0.2
 	NVE.Saturation = -1
 	NVE.Brightness = 0.5
@@ -74,13 +74,12 @@ local Subtitle = Instance.new("TextLabel", VignetteGui)
 	Subtitle.Text = messages[1]
 	Subtitle.BackgroundTransparency = 1
 	Subtitle.Font = Enum.Font.Highway
-	Subtitle.TextColor3 = Ambient
+	Subtitle.TextColor3 = AmbientColor
 	Subtitle.Visible = false
-	Subtitle.Active = false
 	Subtitle.AnchorPoint = Vector2.new(0.5, 1)
 	Subtitle.Size = UDim2.new(1, 0, 0.2, 0)
 	Subtitle.TextSize = 7
-	Subtitle.Position = UDim2.new(0, -20, 0, 0)
+	Subtitle.Position = UDim2.new(0, -25, 0, 0)
 
 local SoundOn = Instance.new("Sound", SoundService)
 	SoundOn.Name = "NightVisionOn"
@@ -104,7 +103,6 @@ local info2 = TweenInfo.new(2)
 
 local nv = false
 local function nvtoggle()
-	print("Toggled", nv)
 	if not nv then
 		nv = true
 		SoundOn:Play()
@@ -126,7 +124,7 @@ local function cl(ch)
 	local light = Instance.new("PointLight", ch:WaitForChild("HumanoidRootPart"))
 		light.Range = 60
 		light.Brightness = 2
-		light.Color = Ambient
+		light.Color = AmbientColor
 		light.Shadows = true
 		light.Enabled = false
 
@@ -151,7 +149,7 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 			local Highlight = Instance.new("Highlight", char)
 				Highlight.Name = "NV_hl"
 				Highlight.FillTransparency = 1
-				Highlight.OutlineColor = Ambient
+				Highlight.OutlineColor = AmbientColor
 				Highlight.Enabled = false
 
 			if Config.Highlights then
@@ -221,7 +219,7 @@ local function voicesinyourhead(plr)
 		Static.Looped = true
 		Static.Playing = true
 
-	Subtitle.Text = messages[math.random(1, #messages)]
+	Subtitle.Text = msgs[math.random(1, #msgs)]
 	Subtitle.Visible = true
 	
 	loop = RunService.RenderStepped:Connect(stare)
@@ -239,13 +237,13 @@ task.spawn(function()
 				local hl = entry.Highlight
 
 				if hl and hl.Parent then
-					hl.OutlineColor = PingCol
-					NVE.TintColor = PingCol
-					Subtitle.TextColor3 = PingCol
+					hl.OutlineColor = PingColor
+					NVE.TintColor = PingColor
+					Subtitle.TextColor3 = PingColor
 						
-					local tween1 = TweenService:Create(hl, info, {OutlineColor = Ambient})
-					local tween2 = TweenService:Create(NVE, info, {TintColor = Ambient})
-					local tween3 = TweenService:Create(Subtitle, info, {TextColor3 = Ambient})
+					local tween1 = TweenService:Create(hl, info, {OutlineColor = AmbientColor})
+					local tween2 = TweenService:Create(NVE, info, {TintColor = AmbientColor})
+					local tween3 = TweenService:Create(Subtitle, info, {TextColor3 = AmbientColor})
 					
 					tween1:Play()
 					tween2:Play()
