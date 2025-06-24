@@ -239,7 +239,7 @@ local function voicesinyourhead(plr)
 		ghostHl.OutlineColor = Color3.new(1, 0, 0)
 		ghostHl.FillColor = Color3.new(0, 0, 0)
 
-	local Static = Instance.new("SoundService", )
+	local Static = Instance.new("Sound", phantom.PrimaryPart)
 		Static.Name = "Static"
 		Static.SoundId = "rbxassetid://4860560167"
 		Static.Volume = 0.35
