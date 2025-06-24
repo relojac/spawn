@@ -230,7 +230,7 @@ local function voicesinyourhead(plr)
 			Subtitle.Visible = false
 		end
 	end
-end]]
+end
 
 task.spawn(function()
 	while true do
