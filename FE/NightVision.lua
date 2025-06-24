@@ -21,46 +21,20 @@ local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 local UserId = Player.UserId
 
-local Players = game:GetService("Players")
-
-local function iterPageItems(pages)
-	return coroutine.wrap(function()
-		local pagenum = 1
-		
-		while true do
-			for _, item in ipairs(pages:GetCurrentPage()) do
-				coroutine.yield(item, pagenum)
-			end
-			if pages.IsFinished then
-				break
-			end
-			pages:AdvanceToNextPageAsync()
-			pagenum = pagenum + 1
-		end
-	end)
-end
-
-local friendPages = Players:GetFriendsAsync(UserId)
-local Friends = {}
-
-for item, _pageNo in iterPageItems(friendPages) do
-	table.insert(Friends, item.UserId)
-end
-
 local messages = {
 	"IT'S ALL YOUR FAULT",
-	"WHY DID YOU KILL US?",
+	"YOU NEED TO KEEP THE GOGGLES ON",
 	"TAKE THE GOGGLES OFF",
 	"MURDERER",
 	"FUCK YOU",
 	"YOU'LL PAY FOR WHAT YOU DID",
 	"TAKE IT OFF",
-	"WE WILL TAKE REVENGE",
+	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
 	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName),
-	"ASSHOLE",
-	"SERIAL KILLER",
+	"WHY DID YOU KILL HER?",
+	"YOU FUCKING IMBECILE",
 	"JUMP",
 	"END IT"
 }
@@ -205,8 +179,8 @@ local function voicesinyourhead(plr)
 
 	if not char then return end
 
-	local corpse = Friends[math.random(1, #Friends)]
-	local corpseName = Players:GetNameFromUserIdAsync(corpse)
+	local corpse = plr.UserId
+	local corpseName = plr.Name
 	local phantom = Players:CreateHumanoidModelFromUserId(corpse)
 		phantom.Name = string.reverse(corpseName)
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
