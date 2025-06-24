@@ -15,7 +15,7 @@ local Debris = game:GetService("Debris")
 
 local Ambient = Config.AmbientColor
 local PingCol = Config.PingColor
-local Schizophrenic = Config.Psychopathic
+local Psychopathic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
@@ -267,7 +267,7 @@ task.spawn(function()
 					tween2:Play()
 					tween3:Play()
 
-					if math.random() < 0.2 and Schizophrenic then
+					if math.random() < 0.2 and Psychopathic then
 						voicesinyourhead(Player)
 					end
 				end
