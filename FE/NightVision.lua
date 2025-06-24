@@ -2,7 +2,7 @@ local execStart = tick() -- *starts timer* okay time to write code
 
 local NVHighlights = {}
 
-local Global = (getgenv and getgenv()) or sharedz
+local Global = (getgenv and getgenv()) or shared
 local Config = Global.SpawnUtilsConfig.NightVision
 
 local Players = game:GetService("Players")
