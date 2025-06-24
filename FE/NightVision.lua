@@ -142,6 +142,9 @@ end
 local function voicesinyourhead(plr)
 	local char = plr.Character or plr.Character:Wait()
 	local hrp = char:WaitForChild("HumanoidRootPart")
+
+	if not plr.Character then return end
+	
 	local phantom = char:Clone()
 		phantom.Name = string.reverse(plr.DisplayName)
 		phantom.Parent = workspace
