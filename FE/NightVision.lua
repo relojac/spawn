@@ -36,6 +36,7 @@ local msgs = {
 	"JUMP",
 	"END IT"
 }
+local randomMsg = 1
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons.JumpButtonFrame
@@ -49,7 +50,7 @@ local NVButton = Instance.new("ImageButton", JumpButtonFrame)
 	NVButton.Image = "rbxassetid://132894389548973"
 
 local NVE = Instance.new("ColorCorrectionEffect", Lighting)
-	NVE.Name = "NVE_1"
+	NVE.Name = "NVE"
 	NVE.Enabled = false
 	NVE.TintColor = AmbientColor
 	NVE.Contrast = 0.2
