@@ -24,16 +24,18 @@ Global.SpawnUtilsConfig = {
 	},
 	["NightVision"] = {
 		["AmbientColor"] = Color3.fromRGB(153, 255, 208),
+		["PingColor"] = Color3.new(255, 100, 100),
 		["Vignette"] = true,
 		["Highlights"] = true,
-		["ColorCorrection"] = true
+		["ColorCorrection"] = true,
+		["Psychopathic"] = true
 	}
 }
 Global.Values = {
 	["FirstPersonLock"] = false
 }
 Global.Optional = {
-	["FunnyMode"] = false,
+	["FunnyMode"] = false, -- Does nothing as of now
 	["HealthBar"] = true,
 	["ShowLimbsInFP"] = true,
 	["InfiniteYield"] = true -- this is the only script i didn't write. made by EdgeIY
