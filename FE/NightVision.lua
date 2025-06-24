@@ -57,7 +57,7 @@ local messages = {
 }
 
 local function createMsg(prefix)
-	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage('<font color="#101010">{prefix}:</font>', messages[1, #messages])
+	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage('<font color="#101010">{prefix}:</font>', messages[math.random(1, #messages)])
 end
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
