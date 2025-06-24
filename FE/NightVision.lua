@@ -143,11 +143,10 @@ local function voicesinyourhead(plr)
 	local char = plr.Character or plr.Character:Wait()
 	local hrp = char:WaitForChild("HumanoidRootPart")
 
-	if not plr.Character then return end
+	if not char then return end
 	
-	local phantom = char:Clone()
+	local phantom = char:Clone(workspace)
 		phantom.Name = string.reverse(plr.DisplayName)
-		phantom.Parent = workspace
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
 
