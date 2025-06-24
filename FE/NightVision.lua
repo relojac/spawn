@@ -210,7 +210,7 @@ local function voicesinyourhead(plr)
 		ghostHl.OutlineColor = Color3.new(1, 0, 0)
 		ghostHl.FillColor = Color3.new(0, 0, 0)
 
-	local Static = Instance.new("Sound", phantom HumanoidRootPart)
+	local Static = Instance.new("Sound", phantom.HumanoidRootPart)
 		Static.Name = "Static"
 		Static.SoundId = "rbxassetid://4860560167"
 		Static.Volume = 0.35
@@ -223,9 +223,13 @@ local function voicesinyourhead(plr)
 	loop = RunService.RenderStepped:Connect(stare)
 
 	Debris:AddItem(phantom, math.random(1, 3))
-
-	task.wait(2)
-	Subtitle.Visible = false
+	
+	while true do
+		if not phantom then
+			break
+			Subtitle.Visible = false
+		end
+	end
 end]]
 
 task.spawn(function()
