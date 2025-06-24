@@ -19,36 +19,33 @@ local Psychopathic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
+local UserId = Player.UserId
 
-local ids = table.create(1000)
-local count = 1
+local Players = game:GetService("Players")
 
-task.spawn(function()
-	local success, pages = pcall(function()
-		return Players:GetFriendsAsync(Player.UserId)
+local function iterPageItems(pages)
+	return coroutine.wrap(function()
+		local pagenum = 1
+		
+		while true do
+			for _, item in ipairs(pages:GetCurrentPage()) do
+				coroutine.yield(item, pagenum)
+			end
+			if pages.IsFinished then
+				break
+			end
+			pages:AdvanceToNextPageAsync()
+			pagenum = pagenum + 1
+		end
 	end)
+end
 
-	if success and pages then
-		local currentPage = pages:GetCurrentPage()
-		repeat
-			for _, item in ipairs(currentPage) do
-				ids[count] = item.Id
-				count += 1
-			end
-			local hasNextPage = false
-			local nextSuccess, nextPage = pcall(function()
-				return pages:AdvanceToNextPageAsync()
-			end)
+local friendPages = Players:GetFriendsAsync(UserId)
+local Friends = {}
 
-			if nextSuccess and not pages.IsFinished then
-				currentPage = pages:GetCurrentPage()
-				hasNextPage = true
-			end
-		until not hasNextPage
-	else
-		warn("Failed to get friends:", pages)
-	end
-end)
+for item, _pageNo in iterPageItems(friendPages) do
+	table.insert(Friends, item.UserId)
+end
 
 local messages = {
 	"IT'S ALL YOUR FAULT",
@@ -208,10 +205,10 @@ local function voicesinyourhead(plr)
 
 	if not char then return end
 
-	local corpse = ids[math.random(1, count)] or Player.UserId
+	local corpse = Friends[math.random(1, #Friends)]
 	local corpseName = Players:GetNameFromUserIdAsync(corpse)
 	local phantom = Players:CreateHumanoidModelFromUserId(corpse)
-		phantom.Name = corpseName
+		phantom.Name = string.reverse(corpseName)
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
 	local loop
