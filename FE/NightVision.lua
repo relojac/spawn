@@ -12,11 +12,68 @@ local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
+local StarterGui = game:GetService("StarterGui")
 
 local Ambient = Config.AmbientColor
+local Schizophrenia = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
+local --[[friends]] deadBodies = Players:GetFriendsAsync(Player.UserId)
+
+local ids = table.create(1000)
+local count = 1
+
+while true do
+	for _, item in ipairs(deadBodies:GetCurrentPage()) do
+		ids[count] = item.Id
+		count += 1
+	end
+
+	if deadBodies.IsFinished then
+		break
+	end
+
+	deadBodies:AdvanceToNextPageAsync()
+end
+
+local function Base64_encode(data)
+    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+	
+    return ((data:gsub('.', function(x) 
+        local r, b = '', x:byte()
+        for i = 8, 1, -1 do r = r .. (b % 2^i - b % 2^(i - 1) > 0 and '1' or '0') end
+        return r;
+    end) .. '0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
+				
+        if (#x < 6) then return '' end
+        local c = 0
+        for i = 1, 6 do c = c + (x:sub(i, i) == '1' and 2^(6-i) or 0) end
+        return b:sub(c+1,c+1)
+    end) .. ({ '', '==', '=' })[#data%3+1])
+end
+
+local messages = {
+	"IT'S ALL YOUR FAULT",
+	"WHY DID YOU KILL US?",
+	"TAKE THE GOGGLES OFF",
+	"MURDERER",
+	"FUCK YOU.",
+	"YOU'LL PAY FOR WHAT YOU DID",
+	"TAKE IT OFF",
+	"WE WILL TAKE REVENGE",
+	"LOSER",
+	"YOU GODDAMN MONSTER.",
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName) .. "."
+}
+
+local function createMsg(prefix)
+	starterGui:SetCore("ChatMakeSystemMessage", {
+		Text = prefix .. ':', messages[math.random(1, 11)]
+		Font = Enum.Font.Montserrat;
+		Color = Color3.new(1, 0, 0);
+	})
+end
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
@@ -61,7 +118,7 @@ local Ping = Instance.new("Sound", SoundService)
 	Ping.Volume = 0.5
 local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.Name = "Reverb"
-	Reverb.DecayTime = 15
+	Reverb.DecayTime = 20
 	Reverb.DryLevel = 0
 	Reverb.WetLevel = 10
 
@@ -104,7 +161,7 @@ local function cl(ch)
 	end
 end
 
-local function hl(victim) -- Do not feel emotion for the cattle. They are not people, they are victims. They are food. They're all yours, Player.Name.
+local function hl(victim) -- Do not feel emotion for the cattle. They are not people, they are victims. They are food.
 	local function onCharacterAdded(char)
 	-- Non-blocking wait loop for HRP
 		task.spawn(function()
@@ -139,20 +196,22 @@ local function hl(victim) -- Do not feel emotion for the cattle. They are not pe
 	end
 end
 
---[[local function voicesinyourhead(plr)
+local function voicesinyourhead(plr)
 	local char = plr.Character or plr.Character:Wait()
 	local hrp = char:WaitForChild("HumanoidRootPart")
 
 	if not char then return end
-	
-	local phantom = char:Clone(workspace)
-		phantom.Name = string.reverse(plr.DisplayName)
+
+	local corpse = ids[math.random(1, count)] or Player.UserId
+	local corpseName = Players:GetNameFromUserIdAsync(corpse)
+	local phantom = Players:CreateHumanoidModelFromUserId(corpse)
+		phantom.Name = Base64_encode(corpseName)
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
 
 	for _, obj in ipairs(phantom:GetDescendants()) do
 		if obj:IsA("BasePart") then
-			obj.Transparency = 0.75
+			obj.Transparency = 0.2
 			obj.CanCollide = false
 			obj.Anchored = true
 		end
@@ -160,9 +219,18 @@ end
 
 	local ghostHl = Instance.new("Highlight", phantom)
 		ghostHl.Name = "Ghosthighlight"
-		ghostHl.FillTransparency = 0
-		ghostHl.OutlineColor = Color3.new(1, 0.4, 1)
+		ghostHl.FillTransparency = 0.5
+		ghostHl.OutlineColor = Color3.new(1, 0, 0)
 		ghostHl.FillColor = Color3.new(0, 0, 0)
+
+	local Static = Instance.new("SoundService", )
+		Static.Name = "Static"
+		Static.SoundId = "rbxassetid://4860560167"
+		Static.Volume = 0.35
+		Static.Looped = true
+		Static.Playing = true
+
+	createMsg(corpseName)
 
 	Debris:AddItem(phantom, math.random(1, 3))
 end]]
@@ -178,9 +246,9 @@ task.spawn(function()
 					local tween = TweenService:Create(hl, info, {OutlineColor = Ambient})
 					tween:Play()
 
-					--[[if math.random() < 0.15 then
-						voicesinyourhead(Players.LocalPlayer)
-					end]]
+					if math.random() < 0.15 then
+						voicesinyourhead(Player)
+					end
 				end
 			end
 			Ping:Play()
@@ -225,3 +293,4 @@ end)
 
 local execEnd = tick() -- *stops timer* okay done :3
 print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to took t o load this
+print("They're all yours,", Player.Name .. ". :)")
