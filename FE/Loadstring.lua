@@ -24,7 +24,7 @@ Global.SpawnUtilsConfig = {
 	},
 	["NightVision"] = {
 		["AmbientColor"] = Color3.fromRGB(153, 255, 208),
-		["PingColor"] = Color3.new(255, 100, 100),
+		["PingColor"] = Color3.fromRGB(255, 100, 100),
 		["Vignette"] = true,
 		["Highlights"] = true,
 		["ColorCorrection"] = true,
