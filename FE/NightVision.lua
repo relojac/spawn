@@ -96,7 +96,7 @@ local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.DryLevel = 0
 	Reverb.WetLevel = 10
 
-local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)0-
+local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
 local nv = false
 local function nvtoggle()
@@ -225,8 +225,8 @@ local function voicesinyourhead(plr)
 	
 	while true do
 		if not phantom then
-			break
 			Subtitle.Visible = false
+			break
 		end
 	end
 end
