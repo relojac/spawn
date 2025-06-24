@@ -97,7 +97,7 @@ local SoundOff = Instance.new("Sound", SoundService)
 	SoundOff.Name = "NightVisionOff"
 	SoundOff.SoundId = "rbxassetid://79003354998655"
 
-local Ping = Instance.new("Sound", SoundService)
+local Ping = Instance.new("Sound", SoundService) -- Could you make me a drink that stops the disorienting beeping noise in my head?
 	Ping.Name = "Ping"
 	Ping.SoundId = "rbxassetid://6011559008"
 	Ping.Volume = 0.5
