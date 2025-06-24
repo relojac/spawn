@@ -12,7 +12,7 @@ local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
-local StarterGui = game:GetService("StarterGui")
+local TextChatService = game:GetService("TextChatService")
 
 local Ambient = Config.AmbientColor
 local PingCol = Config.PingColor
@@ -49,7 +49,7 @@ local messages = {
 	"WE WILL TAKE REVENGE",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName) .. ".",
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName),
 	"ASSHOLE",
 	"SERIAL KILLER",
 	"JUMP",
@@ -57,10 +57,7 @@ local messages = {
 }
 
 local function createMsg(prefix)
-	starterGui:SetCore("ChatMakeSystemMessage", {
-		Text = prefix .. ':', messages[math.random(1, 15);
-		Color = Color3.new(1, 0, 0);
-	})
+	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage('<font color="#101010">{prefix}:</font>', messages[1, #messages])
 end
 
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
