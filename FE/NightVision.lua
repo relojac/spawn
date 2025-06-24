@@ -24,25 +24,29 @@ local ids = table.create(1000)
 local count = 1
 
 task.spawn(function()
-	local success, deadBodies = pcall(function()
+	local success, pages = pcall(function()
 		return Players:GetFriendsAsync(Player.UserId)
 	end)
 
-	if success and deadBodies then
-		while true do
-			for _, item in ipairs(deadBodies:GetCurrentPage()) do
+	if success and pages then
+		local currentPage = pages:GetCurrentPage()
+		repeat
+			for _, item in ipairs(currentPage) do
 				ids[count] = item.Id
 				count += 1
 			end
+			local hasNextPage = false
+			local nextSuccess, nextPage = pcall(function()
+				return pages:AdvanceToNextPageAsync()
+			end)
 
-			if deadBodies.IsFinished then
-				break
+			if nextSuccess and not pages.IsFinished then
+				currentPage = pages:GetCurrentPage()
+				hasNextPage = true
 			end
-
-			deadBodies:AdvanceToNextPageAsync()
-		end
+		until not hasNextPage
 	else
-		warn("failed to get friends:", deadBodies)
+		warn("Failed to get friends:", pages)
 	end
 end)
 
