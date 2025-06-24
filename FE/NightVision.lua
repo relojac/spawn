@@ -192,6 +192,20 @@ local function voicesinyourhead(plr)
 		phantom.Name = corpseName
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
 		phantom:TranslateBy(Vector3.new(5, 0, 5))
+	local loop
+
+	local function stare()
+		if hrp and phantom then
+			local pPos = phantom.PrimaryPart.Position
+			local cPos = hrp.Position
+			local modCPos = Vector3.new(cPos.X, pPos.Y, cPos.Z)
+			local newCF = CFrame.new(pPos, modCPos)
+
+			phantom:SetPrimaryPartCFrame(newCF)
+		else
+			loop:Disconnect()
+		end
+	end
 
 	for _, obj in ipairs(phantom:GetDescendants()) do
 		if obj:IsA("BasePart") then
@@ -215,6 +229,7 @@ local function voicesinyourhead(plr)
 		Static.Playing = true
 
 	createMsg(corpseName)
+	loop = RunService.RenderStepped:Connect(stare)
 
 	Debris:AddItem(phantom, math.random(1, 3))
 end]]
