@@ -6,7 +6,6 @@ local Global = (getgenv and getgenv()) or shared
 local Config = Global.SpawnUtilsConfig.NightVision
 
 local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
@@ -19,8 +18,6 @@ local Psychopathic = Config.Psychopathic
 
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
-local UserId = Player.UserId
-local DisplayName = Player.Character.Humanoid.DisplayName or Player.DisplayName or Player.Name
 
 local msgs = {
 	"IT'S ALL YOUR FAULT",
@@ -33,7 +30,7 @@ local msgs = {
 	"POISON",
 	"LOSER",
 	"YOU GODDAMN MONSTER",
-	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(DisplayName),
+	"YOU'RE NOT GETTING AWAY THIS TIME, " .. string.upper(Player.DisplayName),
 	"WHY DID YOU KILL HER?",
 	"YOU FUCKING IMBECILE",
 	"JUMP",
@@ -72,7 +69,7 @@ local Vignette = Instance.new("ImageLabel", VignetteGui)
 
 local Subtitle = Instance.new("TextLabel", VignetteGui)
 	Subtitle.Name = "Subtitle"
-	Subtitle.Text = messages[1]
+	Subtitle.Text = msgs[1]
 	Subtitle.BackgroundTransparency = 1
 	Subtitle.Font = Enum.Font.Highway
 	Subtitle.TextColor3 = AmbientColor
@@ -124,9 +121,9 @@ end
 local function cl(ch)
 	local light = Instance.new("PointLight", ch:WaitForChild("HumanoidRootPart"))
 		light.Range = 60
-		light.Brightness = 2
+		light.Brightness = 1.25
 		light.Color = AmbientColor
-		light.Shadows = true
+		light.Shadows = false
 		light.Enabled = false
 
 	if light then
@@ -179,7 +176,7 @@ local function voicesinyourhead(plr)
 	if not char then return end
 
 	local corpse = plr.UserId
-	local corpseName = plr.Name
+	local corpseName = plr.DisplayName or plr.Name
 	local phantom = Players:CreateHumanoidModelFromUserId(corpse)
 		phantom.Name = string.reverse(corpseName)
 		phantom:SetPrimaryPartCFrame(hrp.CFrame)
@@ -213,7 +210,7 @@ local function voicesinyourhead(plr)
 		ghostHl.OutlineColor = Color3.new(1, 0, 0)
 		ghostHl.FillColor = Color3.new(0, 0, 0)
 
-	local Static = Instance.new("Sound", phantom.PrimaryPart)
+	local Static = Instance.new("Sound", phantom HumanoidRootPart)
 		Static.Name = "Static"
 		Static.SoundId = "rbxassetid://4860560167"
 		Static.Volume = 0.35
@@ -289,12 +286,5 @@ task.wait()
 print("connect button click")
 NVButton.MouseButton1Click:Connect(nvtoggle)
 
-UserInputService.InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.KeypadSeven then
-		nvtoggle()
-	end
-end)
-
 local execEnd = tick() -- *stops timer* okay done :3
-print("Loaded in " .. tostring(execEnd-execStart) .. ".") -- Basically this should print the amount of time to took t o load this
-print("They're all yours,", Player.Name .. ". :)")
+print("Loaded in " .. tostring(execEnd-execStart) .. ".")
