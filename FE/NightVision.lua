@@ -12,7 +12,6 @@ local Lighting = game:GetService("Lighting")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
-local TextChatService = game:GetService("TextChatService")
 
 local Ambient = Config.AmbientColor
 local PingCol = Config.PingColor
@@ -56,10 +55,6 @@ local messages = {
 	"END IT"
 }
 
-local function createMsg(prefix)
-	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage('<font color="#101010">{prefix}:</font>', messages[math.random(1, #messages)])
-end
-
 local MobileButtons = PlayerGui:WaitForChild("MobileButtonsLocal")
 local JumpButtonFrame = MobileButtons:WaitForChild("JumpButtonFrame") -- This has a separate script that uses Math and the Screen's AbsoluteSize to move it to the jump button.
 
@@ -90,6 +85,19 @@ local Vignette = Instance.new("ImageLabel", VignetteGui)
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
 	Vignette.BackgroundTransparency = 1
 
+local Subtitle = Instance.new("TextLabel", VignetteGui)
+	Subtitle.Name = "Subtitle"
+	Subtitle.Text = messages[1]
+	Subtitle.BackgroundTransparency = 1
+	Subtitle.Font = Enum.Font.Highway
+	Subtitle.TextColor3 = Ambient
+	Subtitle.Visible = false
+	Subtitle.Active = false
+	Subtitle.AnchorPoint = Vector2.new(0.5, 1)
+	Subtitle.Size = UDim2.new(1, 0, 0.2, 0)
+	Subtitle.TextSize = 7
+	Subtitle.Position = UDim2.new(0, -20, 0, 0)
+
 local SoundOn = Instance.new("Sound", SoundService)
 	SoundOn.Name = "NightVisionOn"
 	SoundOn.SoundId = "rbxassetid://376178316"
@@ -108,6 +116,7 @@ local Reverb = Instance.new("ReverbSoundEffect", Ping)
 	Reverb.WetLevel = 10
 
 local info = TweenInfo.new(4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local info2 = TweenInfo.new(2)
 
 local nv = false
 local function nvtoggle()
@@ -228,10 +237,15 @@ local function voicesinyourhead(plr)
 		Static.Looped = true
 		Static.Playing = true
 
-	createMsg(corpseName)
+	Subtitle.Text = messages[math.random(1, #messages)]
+	Subtitle.Visible = true
+	
 	loop = RunService.RenderStepped:Connect(stare)
 
 	Debris:AddItem(phantom, math.random(1, 3))
+
+	task.wait(2)
+	Subtitle.Visible = false
 end]]
 
 task.spawn(function()
@@ -243,12 +257,15 @@ task.spawn(function()
 				if hl and hl.Parent then
 					hl.OutlineColor = PingCol
 					NVE.TintColor = PingCol
+					Subtitle.TextColor3 = PingCol
 						
 					local tween1 = TweenService:Create(hl, info, {OutlineColor = Ambient})
 					local tween2 = TweenService:Create(NVE, info, {TintColor = Ambient})
+					local tween3 = TweenService:Create(Subtitle, info, {TextColor3 = Ambient})
 					
 					tween1:Play()
 					tween2:Play()
+					tween3:Play()
 
 					if math.random() < 0.2 and Schizophrenic then
 						voicesinyourhead(Player)
